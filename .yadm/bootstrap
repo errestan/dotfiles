@@ -10,6 +10,8 @@ MAG_FACTOR_KEY='mag-factor'
 MAG_FACTOR_VAL='3.0'
 MAG_FOCUS_KEY="focus-tracking"
 MAG_FOCUS_VAL="'none'"
+MAG_MOUSE_KEY="mouse-tracking"
+MAG_MOUSE_VAL="'centered'"
 MAG_CURSOR_KEY="caret-tracking"
 MAG_CURSOR_VAL="'centered'"
 MAG_POSITION_KEY="screen-position"
@@ -105,6 +107,7 @@ then
 	set_gsetting $MAG_SCHEME $MAG_FOCUS_KEY $MAG_FOCUS_VAL
 	set_gsetting $MAG_SCHEME $MAG_CURSOR_KEY $MAG_CURSOR_VAL
 	set_gsetting $MAG_SCHEME $MAG_POSITION_KEY $MAG_POSITION_VAL
+	set_gsetting $MAG_SCHEME $MAG_MOUSE_KEY $MAG_MOUSE_VAL
 else
 	LOGE "Unknown host platform: $HOST"
 
