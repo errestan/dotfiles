@@ -1,0 +1,57 @@
+#!/bin/bash
+
+# Variables
+YADM=yadm
+
+# Function to print an informational message, takes two arguments a number indicating the indend level and a string containing the message.
+function LOGI {
+	# Calculate the indent, each level adds two spaces.
+	let indent=$(($1 * 2))
+
+	# If the indent is zero just print the message. If greater than zero print the indent and the message.
+	if [ $indent -eq 0 ];
+	then
+		echo "$2"
+	else
+		message=$(printf "%$(echo $indent)c==> %s" ' ' "$2")
+		echo "$message"
+	fi
+}
+
+# Function to log an error message. Pass a single string argument.
+function LOGE {
+	message=$(printf "Error: %s" "$1")
+	echo "$message"
+}
+
+# Function to check return codes, Pass a number representing the return code to evaluate and a string containing the error message to print.
+function check {
+	# If the first argument is none zero, log the error message and exit.
+	if [ $1 -ne 0 ];
+	then
+		LOGE "$2"
+		exit $1
+	fi
+}
+
+# Check that YADM is installed.
+which $YADM > /dev/null
+check $? "YADM is not installed"
+
+# Initialise all YADM submodules.
+LOGI 0 "Initialising sub-module(s)"
+yadm submodule update --recursive --init > /dev/null 2>&1
+check $? "Unable to initialise sub-module(s)"
+
+HOST=$(uname -s)
+
+if [ "$HOST" = "Linux" ];
+then
+	LOGI 0 "Linux detected"
+else
+	LOGE "Unknown host platform: $HOST"
+fi
+
+
+exit 0
+
