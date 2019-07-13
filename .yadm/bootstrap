@@ -1,7 +1,22 @@
 #!/bin/bash
 
 # Variables
-YADM=yadm
+YADM='yadm'
+APT='apt-get'
+GSETTINGS='gsettings'
+
+MAG_SCHEME='org.gnome.desktop.a11y.magnifier'
+MAG_FACTOR_KEY='mag-factor'
+MAG_FACTOR_VAL='3.0'
+MAG_FOCUS_KEY="focus-tracking"
+MAG_FOCUS_VAL="'none'"
+MAG_CURSOR_KEY="caret-tracking"
+MAG_CURSOR_VAL="'centered'"
+MAG_POSITION_KEY="screen-position"
+MAG_POSITION_VAL="'full-screen'"
+
+# List of packages to install.
+PACKAGES='yadm zsh tmux fonts-powerline clang-format'
 
 # Function to print an informational message, takes two arguments a number indicating the indend level and a string containing the message.
 function LOGI {
@@ -34,6 +49,26 @@ function check {
 	fi
 }
 
+# Function to set GNOME settings values, You must pass three arguments, the scheme, key and new value.
+function set_gsetting {
+	# Check we have three arguments.
+	if [ $# -ne 3 ];
+	then
+		LOGE "Invalid number of arguments $#"
+		exit 1
+	fi
+
+	current=$($GSETTINGS get $1 $2)
+	check $? "Unable to read gnome setting $1.$2"
+
+	if [ "$3" != $current ];
+	then
+		LOGI 1 "Setting $2 to $3"
+		$GSETTINGS set $1 $2 $3
+		check $? "Unable to set value for setting $1.$2"
+	fi
+}
+
 # Check that YADM is installed.
 which $YADM > /dev/null
 check $? "YADM is not installed"
@@ -48,8 +83,32 @@ HOST=$(uname -s)
 if [ "$HOST" = "Linux" ];
 then
 	LOGI 0 "Linux detected"
+
+	# Check that the APT command is present, at some point update this to work with other package managers.
+	which $APT > /dev/null 2>&1
+	check $? "The 'apt' command is not pressent or this is not Debian/Ubuntu"
+
+	# Install the packages in the PACKAGES variable.
+	LOGI 0 "About to install `echo $PACKAGES | wc -w` packages, This will require ROOT privileges"
+	for PKG in $PACKAGES; do
+		LOGI 1 "Installing $PKG"
+		sudo $APT install -y $PKG > /dev/null 2>&1
+		check $? "The $PKG package failed to install"
+	done
+
+	# Configure GNOME Magnifier via the GNOME settings daemon.
+	LOGI 0 "Configuring GNOME Magnifier"
+	which $GSETTINGS > /dev/null 2>&1
+	check $? "Couldn't find GNOME settings, is this GNOME?"
+
+	set_gsetting $MAG_SCHEME $MAG_FACTOR_KEY $MAG_FACTOR_VAL
+	set_gsetting $MAG_SCHEME $MAG_FOCUS_KEY $MAG_FOCUS_VAL
+	set_gsetting $MAG_SCHEME $MAG_CURSOR_KEY $MAG_CURSOR_VAL
+	set_gsetting $MAG_SCHEME $MAG_POSITION_KEY $MAG_POSITION_VAL
 else
 	LOGE "Unknown host platform: $HOST"
+
+	exit 1
 fi
 
 
