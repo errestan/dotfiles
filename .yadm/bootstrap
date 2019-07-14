@@ -18,7 +18,7 @@ MAG_POSITION_KEY="screen-position"
 MAG_POSITION_VAL="'full-screen'"
 
 # List of packages to install.
-PACKAGES='yadm zsh tmux fonts-powerline clang-format'
+PACKAGES='yadm zsh tmux fonts-powerline clang-format curl scdaemon'
 
 # Function to print an informational message, takes two arguments a number indicating the indend level and a string containing the message.
 function LOGI {
