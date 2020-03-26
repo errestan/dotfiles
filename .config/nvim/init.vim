@@ -36,8 +36,8 @@ endif
 " List Plugins to be installed.
 silent! if plug#begin()
 	" NERD Tree
-	Plug 'scrooloose/nerdtree'
-	Plug 'scrooloose/nerdtree'
+	Plug 'preservim/nerdtree'
+	Plug 'Xuyuanp/nerdtree-git-plugin'
 
 	" vim-airline
 	Plug 'vim-airline/vim-airline'
@@ -111,4 +111,4 @@ map <C-K> :pyf /usr/share/clang/clang-format.py<cr>
 imap <C-K> <c-o>:pyf /usr/share/clang/clang-format.py<cr>
 
 " Toggle NERDTree window.
-map <C-e> :NERDTreeToggle<CR>
+map <S-e> :NERDTreeToggle<CR>

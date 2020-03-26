@@ -1,3 +1,5 @@
 [user]
 	email = lee@localhost
 	name = Lee
+[core]
+	editor = nvim
