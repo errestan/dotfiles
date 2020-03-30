@@ -102,6 +102,9 @@ let g:airline_powerline_fonts = 1
 " Keyboard Shortcuts.
 "
 
+" Set the "Leader" key to space bar.
+let mapleader = " "
+
 " Buffer shortcuts.
 map <F2> :bn<CR>
 map <F3> :bp<CR>
@@ -112,3 +115,8 @@ imap <C-K> <c-o>:pyf /usr/share/clang/clang-format.py<cr>
 
 " Toggle NERDTree window.
 map <S-e> :NERDTreeToggle<CR>
+
+" Map common commands to leader short-cuts.
+map <Leader>s :w<CR>
+map <Leader>c :bdel<CR>
+
