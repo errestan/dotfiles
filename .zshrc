@@ -1,7 +1,10 @@
+# Enable plugins.
+plugins=(zsh-autosuggestions git docker docker-compose zsh-syntax-highlighting apt)
+
 # Set up the prompt
 autoload -Uz promptinit
 promptinit
-prompt adam1
+. ~/.prompt
 
 # Vi mode
 bindkey -v
@@ -55,4 +58,7 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 
 # colored GCC warnings and errors
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+
+# Add exports from your profile
+source ~/.profile
 
