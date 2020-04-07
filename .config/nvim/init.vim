@@ -19,8 +19,11 @@ set scrolloff=5
 " Enable spell checker.
 setlocal spell spelllang=en_gb
 
+" Allow modified buffers to be hidden.
+set hidden
+
 "
-" vim-plug Installation and setup.
+" Vim-plug Installation and setup.
 "
 
 " If vim-plug isn't installed, download it.
@@ -35,32 +38,32 @@ endif
 
 " List Plugins to be installed.
 silent! if plug#begin()
-	" NERD Tree
-	Plug 'preservim/nerdtree'
-	Plug 'Xuyuanp/nerdtree-git-plugin'
+    " NERD Tree
+    Plug 'preservim/nerdtree'
+    Plug 'Xuyuanp/nerdtree-git-plugin'
 
-	" vim-airline
-	Plug 'vim-airline/vim-airline'
-	Plug 'vim-airline/vim-airline-themes'
+    " vim-airline
+    Plug 'vim-airline/vim-airline'
+    Plug 'vim-airline/vim-airline-themes'
 
-	" Allow tmux to share airline appearance.
-	Plug 'edkolev/tmuxline.vim'
+    " Allow tmux to share airline appearance.
+    Plug 'edkolev/tmuxline.vim'
 
-	" Restore cursor to lst place in file.
-	Plug 'farmergreg/vim-lastplace'
+    " Restore cursor to lst place in file.
+    Plug 'farmergreg/vim-lastplace'
 
-	call plug#end()
+    call plug#end()
 endif
 
 "
 " Configure Paper Color theme.
-" 
+"
 
 " Not sure if this is needed.
 set t_Co=256
 set laststatus=2
 
-" Set Paper Color Theme settings. Enable bold and italics. 
+" Set Paper Color Theme settings. Enable bold and italics.
 let g:PaperColor_Theme_Options = {
   \   'theme': {
   \     'default.dark': {
@@ -98,6 +101,9 @@ let g:airline#extensions#tabline#formatter = 'unique_tail'
 " Use patched powerline fonts.
 let g:airline_powerline_fonts = 1
 
+" Show buffer number in status line.
+set laststatus=2 statusline=%02n:%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
+
 "
 " Keyboard Shortcuts.
 "
@@ -120,3 +126,14 @@ map <S-e> :NERDTreeToggle<CR>
 map <Leader>s :w<CR>
 map <Leader>c :bdel<CR>
 
+" Map short cuts to jump to buffers.
+nnoremap <Leader>1 :1b<CR>
+nnoremap <Leader>2 :2b<CR>
+nnoremap <Leader>3 :3b<CR>
+nnoremap <Leader>4 :4b<CR>
+nnoremap <Leader>5 :5b<CR>
+nnoremap <Leader>6 :6b<CR>
+nnoremap <Leader>7 :7b<CR>
+nnoremap <Leader>8 :8b<CR>
+nnoremap <Leader>9 :9b<CR>
+nnoremap <Leader>0 :10b<CR>
