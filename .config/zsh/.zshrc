@@ -4,7 +4,7 @@ plugins=(zsh-autosuggestions git docker docker-compose zsh-syntax-highlighting a
 # Set up the prompt
 autoload -Uz promptinit
 promptinit
-. ~/.prompt
+. "$ZDOTDIR/.prompt"
 
 # Vi mode
 bindkey -v
@@ -14,7 +14,7 @@ setopt histignorealldups sharehistory
 # Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
 HISTSIZE=1000
 SAVEHIST=1000
-HISTFILE=~/.zsh_history
+HISTFILE=~"/.zsh_history"
 
 # Use modern completion system
 autoload -Uz compinit
