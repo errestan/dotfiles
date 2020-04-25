@@ -62,3 +62,8 @@ export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quo
 # Add exports from your profile
 source ~/.profile
 
+# Source FZF key bindings if they exist.
+FZF_ZSH_PATH="/usr/share/doc/fzf/examples/key-bindings.zsh"
+if [ -f $FZF_ZSH_PATH ]; then
+	source $FZF_ZSH_PATH
+fi

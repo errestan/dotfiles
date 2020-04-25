@@ -18,7 +18,7 @@ MAG_POSITION_KEY="screen-position"
 MAG_POSITION_VAL="'full-screen'"
 
 # List of packages to install.
-PACKAGES='yadm zsh tmux fonts-powerline clang-format curl scdaemon'
+PACKAGES='yadm zsh tmux fonts-powerline clang-format curl scdaemon fzf'
 
 # Function to print an informational message, takes two arguments a number indicating the indend level and a string containing the message.
 function LOGI {
@@ -108,6 +108,14 @@ then
 	set_gsetting $MAG_SCHEME $MAG_CURSOR_KEY $MAG_CURSOR_VAL
 	set_gsetting $MAG_SCHEME $MAG_POSITION_KEY $MAG_POSITION_VAL
 	set_gsetting $MAG_SCHEME $MAG_MOUSE_KEY $MAG_MOUSE_VAL
+
+	# Configure zsh.
+	LOGI 0 "Configuring zsh"
+	if [ ! -f .zshenv ];
+	then
+		ln -s .config/zsh/.zshenv .zshenv
+		check $? "Couldn't create symbolic link to zsh environment"
+	fi
 else
 	LOGE "Unknown host platform: $HOST"
 

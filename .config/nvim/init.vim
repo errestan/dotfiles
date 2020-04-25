@@ -72,6 +72,10 @@ silent! if plug#begin()
     " Python auto-completion.
     Plug 'davidhalter/jedi-vim'
 
+    " FZF - Fuzzy find plug-ins.
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+    Plug 'junegunn/fzf.vim'
+
     call plug#end()
 endif
 
