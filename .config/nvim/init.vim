@@ -2,6 +2,9 @@
 "  General configuration.
 "
 
+" Always use UTF-8.
+set encoding=utf-8
+
 " Select colour scheme.
 set background=dark
 colorscheme PaperColor
@@ -21,6 +24,14 @@ setlocal spell spelllang=en_gb
 
 " Allow modified buffers to be hidden.
 set hidden
+
+
+"
+" Python setup.
+"
+
+let python_highlight_all=1
+syntax on
 
 "
 " Vim-plug Installation and setup.
@@ -42,7 +53,7 @@ silent! if plug#begin()
     Plug 'preservim/nerdtree'
     Plug 'Xuyuanp/nerdtree-git-plugin'
 
-    " vim-airline
+    " Vim-airline
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
 
@@ -51,6 +62,15 @@ silent! if plug#begin()
 
     " Restore cursor to lst place in file.
     Plug 'farmergreg/vim-lastplace'
+
+    " Python PEP-8 compliance.
+    Plug 'nvie/vim-flake8'
+
+    " Syntax highlighting.
+    Plug 'vim-syntastic/syntastic'
+
+    " Python auto-completion.
+    Plug 'davidhalter/jedi-vim'
 
     call plug#end()
 endif
