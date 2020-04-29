@@ -129,6 +129,18 @@ let g:airline_powerline_fonts = 1
 set laststatus=2 statusline=%02n:%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
 
 "
+" Configure vim-flake8
+"
+
+" Show marks in the gutter.
+let g:flake8_show_in_gutter = 1
+
+" Show marks in the file.
+let g:flake8_show_in_file = 1
+
+" Automatically run flake-8 when saving a python file.
+autocmd BufWritePost *.py call flake8#Flake8()
+"
 " Keyboard Shortcuts.
 "
 
@@ -139,7 +151,7 @@ let mapleader = " "
 map <F2> :bn<CR>
 map <F3> :bp<CR>
 
-" Clang-format shortcuts.
+" Clang-format short cuts for C/C++.
 map <C-K> :pyf /usr/share/clang/clang-format.py<cr>
 imap <C-K> <c-o>:pyf /usr/share/clang/clang-format.py<cr>
 
