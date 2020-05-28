@@ -80,6 +80,11 @@ silent! if plug#begin()
 
     " Git plug-in.
     Plug 'tpope/vim-fugitive'
+
+    " Plug-ins to improve tag behaviour.
+    Plug 'ludovicchabant/vim-gutentags'
+    Plug 'skywind3000/gutentags_plus'
+
     call plug#end()
 endif
 
@@ -132,6 +137,9 @@ let g:airline_powerline_fonts = 1
 " Show buffer number in status line.
 set laststatus=2 statusline=%02n:%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
 
+" Enable Gutentags integration.
+let g:airline#extensions#gutentags#enabled = 1
+
 "
 " Configure Syntastic
 "
@@ -146,6 +154,22 @@ let g:syntastic_check_on_wq = 0
 " Android NDK putting a 'python' binary on the path. This will break if
 " editing Python 2 files. 
 let g:syntastic_python_python_exec = 'python3'
+
+"
+" Configure Gutentags and Gutentags PLUS.
+"
+
+" Enable gtags module
+let g:gutentags_modules = ['ctags', 'gtags_cscope']
+
+" Generate databases in cache directory.
+let g:gutentags_cache_dir = expand('~/.cache/tags')
+
+" Change focus to quick-fix window after search.
+let g:gutentags_plus_switch = 1
+
+" Disable default key bindings.
+let g:gutentags_plus_nomap = 1
 
 "
 " Keyboard Shortcuts.
@@ -180,3 +204,15 @@ nnoremap <Leader>7 :7b<CR>
 nnoremap <Leader>8 :8b<CR>
 nnoremap <Leader>9 :9b<CR>
 nnoremap <Leader>0 :10b<CR>
+
+" Customize tag key bindings.
+noremap <silent> <leader>gs :GscopeFind s <C-R><C-W><cr>
+noremap <silent> <leader>gg :GscopeFind g <C-R><C-W><cr>
+noremap <silent> <leader>gc :GscopeFind c <C-R><C-W><cr>
+noremap <silent> <leader>gt :GscopeFind t <C-R><C-W><cr>
+noremap <silent> <leader>ge :GscopeFind e <C-R><C-W><cr>
+noremap <silent> <leader>gf :GscopeFind f <C-R>=expand("<cfile>")<cr><cr>
+noremap <silent> <leader>gi :GscopeFind i <C-R>=expand("<cfile>")<cr><cr>
+noremap <silent> <leader>gd :GscopeFind d <C-R><C-W><cr>
+noremap <silent> <leader>ga :GscopeFind a <C-R><C-W><cr>
+noremap <silent> <leader>gz :GscopeFind z <C-R><C-W><cr>
