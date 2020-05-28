@@ -25,6 +25,11 @@ setlocal spell spelllang=en_gb
 " Allow modified buffers to be hidden.
 set hidden
 
+" Configure tabs.
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set expandtab
 
 "
 " Python setup.
