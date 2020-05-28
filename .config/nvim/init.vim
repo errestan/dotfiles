@@ -78,6 +78,8 @@ silent! if plug#begin()
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
 
+    " Git plug-in.
+    Plug 'tpope/vim-fugitive'
     call plug#end()
 endif
 
