@@ -164,7 +164,7 @@ imap <C-K> <c-o>:pyf /usr/share/clang/clang-format.py<cr>
 map <S-e> :NERDTreeToggle<CR>
 
 " Map common commands to leader short-cuts.
-map <Leader>s :w<CR>
+map <Leader>w :w<CR>
 map <Leader>c :bdel<CR>
 
 " Map short cuts to jump to buffers.
