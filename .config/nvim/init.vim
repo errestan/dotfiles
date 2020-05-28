@@ -65,11 +65,8 @@ silent! if plug#begin()
     " Allow tmux to share airline appearance.
     Plug 'edkolev/tmuxline.vim'
 
-    " Restore cursor to lst place in file.
+    " Restore cursor to last place in file.
     Plug 'farmergreg/vim-lastplace'
-
-    " Python PEP-8 compliance.
-    Plug 'nvie/vim-flake8'
 
     " Syntax highlighting.
     Plug 'vim-syntastic/syntastic'
@@ -134,17 +131,20 @@ let g:airline_powerline_fonts = 1
 set laststatus=2 statusline=%02n:%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
 
 "
-" Configure vim-flake8
+" Configure Syntastic
 "
 
-" Show marks in the gutter.
-let g:flake8_show_in_gutter = 1
+" Configure syntastic output.
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 
-" Show marks in the file.
-let g:flake8_show_in_file = 1
+" Make syntastic use a specific python executable. This is to work around the
+" Android NDK putting a 'python' binary on the path. This will break if
+" editing Python 2 files. 
+let g:syntastic_python_python_exec = 'python3'
 
-" Automatically run flake-8 when saving a python file.
-autocmd BufWritePost *.py call flake8#Flake8()
 "
 " Keyboard Shortcuts.
 "
