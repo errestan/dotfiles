@@ -1,52 +1,27 @@
-# Enable plugins.
+# Enable plug-ins.
 plugins=(zsh-autosuggestions git docker docker-compose zsh-syntax-highlighting apt)
 
-# Set up the prompt
+# Enable customized shell prompt.
 autoload -Uz promptinit
 promptinit
+
+# Load custom prompt.
 . "$ZDOTDIR/.prompt"
 
-# Vi mode
-bindkey -v
-
+# Ignore duplicate commands and share history across sessions.
 setopt histignorealldups sharehistory
 
-# Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
-HISTSIZE=1000
-SAVEHIST=1000
-HISTFILE=~"/.zsh_history"
+# Set command history to be saved to a specific file.
+HISTFILE=~"/.hist_file"
 
-# Use modern completion system
-autoload -Uz compinit
-compinit
+# Keep lots of command history.
+HISTSIZE=10000000
+SAVEHIST=10000000
 
-zstyle ':completion:*' auto-description 'specify: %d'
-zstyle ':completion:*' completer _expand _complete _correct _approximate
-zstyle ':completion:*' format 'Completing %d'
-zstyle ':completion:*' group-name ''
-zstyle ':completion:*' menu select=2
-eval "$(dircolors -b)"
-zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
-zstyle ':completion:*' list-colors ''
-zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
-zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=* l:|=*'
-zstyle ':completion:*' menu select=long
-zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
-zstyle ':completion:*' use-compctl false
-zstyle ':completion:*' verbose true
+# Enable Vim mode for command editing.
+bindkey -v
 
-zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
-zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
-
-# GPG Agent
-if [ -f "${HOME}/.gpg-agent-info" ]; then
-     . "${HOME}/.gpg-agent-info"
-     export GPG_AGENT_INFO
-     export SSH_AUTH_SOCK
-     export SSH_AGENT_PID
-fi
-
-# Setup shell aliases.
+# Set-up shell aliases.
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
@@ -56,14 +31,36 @@ alias egrep='egrep --color=auto'
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
-# colored GCC warnings and errors
-export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
-
 # Add exports from your profile
 source ~/.profile
 
 # Source FZF key bindings if they exist.
-FZF_ZSH_PATH="/usr/share/doc/fzf/examples/key-bindings.zsh"
 if [ -f $FZF_ZSH_PATH ]; then
 	source $FZF_ZSH_PATH
 fi
+
+# Do menu-driven completion.
+zstyle ':completion:*' menu yes select
+
+# Colour completion for some things.
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+
+# Formatting and messages.
+zstyle ':completion:*' verbose yes
+zstyle ':completion:*:descriptions' format "$fg[yellow]%B--- %d%b"
+zstyle ':completion:*:messages' format '%d'
+zstyle ':completion:*:warnings' format "$fg[red]No matches for:$reset_color %d"
+zstyle ':completion:*:corrections' format '%B%d (errors: %e)%b'
+zstyle ':completion:*' group-name ''
+
+# Set file used by compinstall.
+zstyle :compinstall filename '/home/lclark/.config/zsh/.zshrc'
+
+autoload -Uz compinit
+compinit
+
+# Make cd push the old directory onto the directory stack.
+setopt auto_pushd
+
+# Don't push the same dir twice.
+setopt pushd_ignore_dups
