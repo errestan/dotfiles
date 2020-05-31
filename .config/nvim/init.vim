@@ -5,10 +5,6 @@
 " Always use UTF-8.
 set encoding=utf-8
 
-" Select colour scheme.
-set background=dark
-colorscheme PaperColor
-
 " Enable line numbering.
 set number
 set relativenumber
@@ -32,7 +28,15 @@ set shiftwidth=4
 set expandtab
 
 "
-" Python setup.
+"  Colour configuration.
+"
+
+" Select colour scheme.
+set background=dark
+colorscheme PaperColor
+
+"
+"  Python set-up.
 "
 
 let python_highlight_all=1
@@ -92,7 +96,7 @@ silent! if plug#begin()
 endif
 
 "
-" Configure Paper Color theme.
+"  Configure Paper Color theme.
 "
 
 " Not sure if this is needed.
@@ -110,24 +114,24 @@ let g:PaperColor_Theme_Options = {
   \ }
 
 "
-" Configure NERDTree
+"  Configure NERD-Tree
 "
 
-" Move NERDTree to the right.
+" Move NERD-Tree to the right.
 let g:NERDTreeWinPos = "right"
 
-" Close NERDTree on file open.
+" Close NERD-Tree on file open.
 let NERDTreeQuitOnOpen=1
 
-" Open a NERDTree window if no file was specified on startup.
+" Open a NERD-Tree window if no file was specified on startup.
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
-" Close Vim if NERDTree is all that is left.
+" Close Vim if NERD-Tree is all that is left.
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 "
-" Configure vim-airline
+"  Configure vim-airline
 "
 
 " Enable buffers in tab line.
@@ -138,13 +142,13 @@ let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:airline_powerline_fonts = 1
 
 " Show buffer number in status line.
-set laststatus=2 statusline=%02n:%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
+set statusline=%02n:%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
 
 " Enable Gutentags integration.
 let g:airline#extensions#gutentags#enabled = 1
 
 "
-" Configure Syntastic
+"  Configure Syntastic
 "
 
 " Configure syntastic output.
@@ -155,11 +159,11 @@ let g:syntastic_check_on_wq = 0
 
 " Make syntastic use a specific python executable. This is to work around the
 " Android NDK putting a 'python' binary on the path. This will break if
-" editing Python 2 files. 
+" editing Python 2 files.
 let g:syntastic_python_python_exec = 'python3'
 
 "
-" Configure Gutentags and Gutentags PLUS.
+"  Configure Gutentags and Gutentags PLUS.
 "
 
 " Enable gtags module
@@ -175,7 +179,7 @@ let g:gutentags_plus_switch = 1
 let g:gutentags_plus_nomap = 1
 
 "
-" Keyboard Shortcuts.
+"  Keyboard Shortcuts.
 "
 
 " Set the "Leader" key to space bar.
@@ -189,7 +193,7 @@ map <F3> :bp<CR>
 map <C-K> :pyf /usr/share/clang/clang-format.py<cr>
 imap <C-K> <c-o>:pyf /usr/share/clang/clang-format.py<cr>
 
-" Toggle NERDTree window.
+" Toggle NERD-Tree window.
 map <S-e> :NERDTreeToggle<CR>
 
 " Map common commands to leader short-cuts.
