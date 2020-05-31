@@ -85,6 +85,9 @@ silent! if plug#begin()
     Plug 'ludovicchabant/vim-gutentags'
     Plug 'skywind3000/gutentags_plus'
 
+    " Comment plug-in.
+    Plug 'tpope/vim-commentary'
+
     call plug#end()
 endif
 
