@@ -27,23 +27,32 @@ set softtabstop=4
 set shiftwidth=4
 set expandtab
 
+" Enable syntax highlighting.
+syntax enable
+
 "
 "  Colour configuration.
 "
+
+" 24-bit colour support.
+set termguicolors
 
 " Select colour scheme.
 set background=dark
 colorscheme PaperColor
 
-"
-"  Python set-up.
-"
+" Set Paper Color Theme settings. Enable bold and italics.
+let g:PaperColor_Theme_Options = {
+  \   'theme': {
+  \     'default.dark': {
+  \       'allow_bold': 1,
+  \       'allow_italic': 1
+  \     }
+  \   }
+  \ }
 
-let python_highlight_all=1
-syntax on
-
 "
-" Vim-plug Installation and setup.
+"  Vim-plug Installation and setup.
 "
 
 " If vim-plug isn't installed, download it.
@@ -94,24 +103,6 @@ silent! if plug#begin()
 
     call plug#end()
 endif
-
-"
-"  Configure Paper Color theme.
-"
-
-" Not sure if this is needed.
-set t_Co=256
-set laststatus=2
-
-" Set Paper Color Theme settings. Enable bold and italics.
-let g:PaperColor_Theme_Options = {
-  \   'theme': {
-  \     'default.dark': {
-  \       'allow_bold': 1,
-  \       'allow_italic': 1
-  \     }
-  \   }
-  \ }
 
 "
 "  Configure NERD-Tree
