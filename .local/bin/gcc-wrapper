@@ -8,6 +8,7 @@
 # basis).
 
 import os
+import subprocess
 import sys
 
 # Default compiler configuration file name and compiler.
@@ -39,7 +40,7 @@ def find_config(path):
         log(f"Scanning path {full_path} for compiler configuration file.")
         file = os.path.join(full_path, DEFAULT_CONFFILE)
 
-        if os.path.exists(file):
+        if os.path.isfile(file):
             return file
 
         (head, tail) = os.path.split(full_path)
@@ -51,31 +52,28 @@ def find_config(path):
 
         full_path = head
 
-    raise OSError()
+    raise FileNotFoundError()
 
 
-def main():
-    command = ''
-
-    try:
-        # Search backward through the current path and locate the first configuration file.
-        config_file = find_config(os.curdir)
-
-        # Read the compiler to use from the configuration file.
-        command = read_config(config_file)
-    except OSError:
-        log("Error: No configuration file found.")
-        command = DEFAULT_COMPILER
-
-    for arg in sys.argv[1:]:
-        if arg != '-masm=att':
-            command += " " + arg
-
-    log(command)
-    ret = os.system(command)
-
-    sys.exit(ret)
+def execute(command):
+    return subprocess.run(command.split(' '))
 
 
-if __name__ == '__main__':
-    main()
+command = ''
+
+try:
+    # Search backward through the current path and locate the first configuration file.
+    config_file = find_config(os.curdir)
+
+    # Read the compiler to use from the configuration file.
+    command = read_config(config_file)
+except FileNotFoundError:
+    log("Error: No configuration file found.")
+    command = DEFAULT_COMPILER
+
+# Filter the arguments and append them to the command.
+command += " ".join(arg for arg in sys.argv[1:] if arg != '-masm=att')
+
+ret = execute(command)
+
+sys.exit(ret)
