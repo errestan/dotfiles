@@ -1,0 +1,81 @@
+#!/usr/bin/env python3
+
+# This script provides a GNU C compiler wrapper for working with multiple different versions. For
+# example you may have project writen for Linux and for Android where the Android project uses the
+# Android NDK specific version of GCC. By placing a small text file in your project directory you can
+# specify which compiler to use for that project. This works great with the Syntastic Vim plug-in
+# where you can only configure a single global compiler (Or configure a compiler on a per buffer
+# basis).
+
+import os
+import sys
+
+# Default compiler configuration file name and compiler.
+DEFAULT_CONFFILE = ".syntastic-compiler"
+DEFAULT_COMPILER = 'gcc'
+
+
+def log(msg):
+    with open("/home/lclark/log.txt", 'a') as file:
+        file.write(msg + '\n')
+
+
+def read_config(path):
+    compiler = ''
+
+    with open(path, 'r') as file:
+        compiler = file.read()
+
+    if not compiler:
+        compiler = DEFAULT_COMPILER
+
+    return compiler.strip('\n')
+
+
+def find_config(path):
+    full_path = os.path.abspath(path)
+
+    while os.path.isdir(full_path):
+        log(f"Scanning path {full_path} for compiler configuration file.")
+        file = os.path.join(full_path, DEFAULT_CONFFILE)
+
+        if os.path.exists(file):
+            return file
+
+        (head, tail) = os.path.split(full_path)
+
+        # Once we hit the root, split will be unable to complete and will return the same path in 'tail'. To prevent
+        # infinite loop, check whether head is empty and break out of the loop.
+        if not tail:
+            break
+
+        full_path = head
+
+    raise OSError()
+
+
+def main():
+    command = ''
+
+    try:
+        # Search backward through the current path and locate the first configuration file.
+        config_file = find_config(os.curdir)
+
+        # Read the compiler to use from the configuration file.
+        command = read_config(config_file)
+    except OSError:
+        log("Error: No configuration file found.")
+        command = DEFAULT_COMPILER
+
+    for arg in sys.argv[1:]:
+        if arg != '-masm=att':
+            command += " " + arg
+
+    log(command)
+    ret = os.system(command)
+
+    sys.exit(ret)
+
+
+if __name__ == '__main__':
+    main()
