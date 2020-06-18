@@ -1,4 +1,16 @@
 "
+"  Functions.
+"
+
+" Function to source only if file exists {
+function! SourceIfExists(file)
+  if filereadable(expand(a:file))
+    exe 'source' a:file
+  endif
+endfunction
+" }
+
+"
 "  General configuration.
 "
 
@@ -157,6 +169,11 @@ let g:syntastic_python_python_exec = 'python3'
 " Assembly files.
 let g:syntastic_c_gcc_compiler = '/home/lclark/Development/bin/gcc-wrapper'
 let g:syntastic_asm_compiler = '/home/lclark/Development/bin/gcc-wrapper'
+
+" Set the name of the configuration file Syntastic will use to find C and CPP
+" flags for C files.
+let g:syntastic_c_config_file = '.syntastic_c_config'
+
 "
 "  Configure Gutentags and Gutentags PLUS.
 "
@@ -218,3 +235,9 @@ noremap <silent> <leader>gi :GscopeFind i <C-R>=expand("<cfile>")<cr><cr>
 noremap <silent> <leader>gd :GscopeFind d <C-R><C-W><cr>
 noremap <silent> <leader>ga :GscopeFind a <C-R><C-W><cr>
 noremap <silent> <leader>gz :GscopeFind z <C-R><C-W><cr>
+
+"
+"  Apply local settings if present.
+"
+
+call SourceIfExists("~/.config/nvim/init.local")
