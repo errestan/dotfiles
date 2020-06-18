@@ -18,7 +18,7 @@ MAG_POSITION_KEY="screen-position"
 MAG_POSITION_VAL="'full-screen'"
 
 # List of packages to install.
-PACKAGES='zsh tmux fonts-powerline clang-format curl scdaemon fzf flake8 exuberant-ctags global"
+PACKAGES='zsh tmux fonts-powerline clang-format curl scdaemon fzf flake8 exuberant-ctags global black"
 
 # Function to print an informational message, takes two arguments a number indicating the indend level and a string containing the message.
 function LOGI {
@@ -114,7 +114,7 @@ then
 	if [ ! -f .zshenv ];
 	then
 		ln -s .config/zsh/.zshenv .zshenv
-		check $? "Couldn't create symbolic link to zsh environment"
+		check $? "Couldn\'t create symbolic link to zsh environment"
 	fi
 else
 	LOGE "Unknown host platform: $HOST"
@@ -124,4 +124,3 @@ fi
 
 
 exit 0
-

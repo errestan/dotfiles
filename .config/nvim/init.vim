@@ -113,6 +113,9 @@ silent! if plug#begin()
     " Comment plug-in.
     Plug 'tpope/vim-commentary'
 
+    " Python code formatter.
+    Plug 'psf/black', { 'tag': '19.10b0' }
+
     call plug#end()
 endif
 
@@ -149,6 +152,13 @@ set statusline=%02n:%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
 
 " Enable Gutentags integration.
 let g:airline#extensions#gutentags#enabled = 1
+
+"
+"  Configure Black.
+"
+
+" Set default line length.
+let g:black_linelength = 120
 
 "
 "  Configure Syntastic
