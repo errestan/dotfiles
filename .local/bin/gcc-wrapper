@@ -13,24 +13,24 @@ import sys
 
 # Default compiler configuration file name and compiler.
 DEFAULT_CONFFILE = ".syntastic-compiler"
-DEFAULT_COMPILER = 'gcc'
+DEFAULT_COMPILER = "gcc"
 
 
 def log(msg):
-    with open("/home/lclark/log.txt", 'a', newline='\n') as file:
+    with open("/home/lclark/log.txt", "a", newline="\n") as file:
         file.write(msg)
 
 
 def read_config(path):
-    compiler = ''
+    compiler = ""
 
-    with open(path, 'r') as file:
+    with open(path, "r") as file:
         compiler = file.read()
 
     if not compiler:
         compiler = DEFAULT_COMPILER
 
-    return compiler.strip('\n')
+    return compiler.strip("\n")
 
 
 def find_config(path):
@@ -56,11 +56,11 @@ def find_config(path):
 
 
 def execute(command):
-    return subprocess.run(command.split(' '))
+    return subprocess.run(command.split(" "))
 
 
-if __name__ == '__main__':
-    command = ''
+if __name__ == "__main__":
+    command = ""
 
     try:
         # Search backward through the current path and locate the first configuration file.
@@ -73,7 +73,7 @@ if __name__ == '__main__':
         command = DEFAULT_COMPILER
 
     # Filter the arguments and append them to the command.
-    command += " ".join(arg for arg in sys.argv[1:] if arg != '-masm=att')
+    command += " ".join(arg for arg in sys.argv[1:] if arg != "-masm=att")
 
     ret = execute(command)
 
