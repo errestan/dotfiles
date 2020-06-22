@@ -160,6 +160,9 @@ let g:airline#extensions#gutentags#enabled = 1
 " Set default line length.
 let g:black_linelength = 120
 
+" Automatically run Black when saving Python files.
+autocmd BufWritePre *.py execute ':Black'
+
 "
 "  Configure Syntastic
 "
@@ -211,9 +214,13 @@ let mapleader = " "
 map <F2> :bn<CR>
 map <F3> :bp<CR>
 
-" Clang-format short cuts for C/C++.
-map <C-K> :pyf /usr/share/clang/clang-format.py<cr>
-imap <C-K> <c-o>:pyf /usr/share/clang/clang-format.py<cr>
+" Set-up code formatters on a per-file-type basis.
+" For C files use: Clang-format short cuts for C/C++.
+autocmd FileType C map <buffer> <C-K> :pyf /usr/share/clang/clang-format.py<cr>
+autocmd FileType C imap <buffer> <C-K> <c-o>:pyf /usr/share/clang/clang-format.py<cr>
+
+" For Python files use: Black.
+autocmd FileType python map <buffer> <C-K> :Black<CR>
 
 " Toggle NERD-Tree window.
 map <S-e> :NERDTreeToggle<CR>
