@@ -14,11 +14,12 @@ import sys
 # Default compiler configuration file name and compiler.
 DEFAULT_CONFFILE = ".syntastic-compiler"
 DEFAULT_COMPILER = "gcc"
+DEFAULT_LOG_FILE = "~/log.txt"
 
 
 def log(msg):
-    with open("/home/lclark/log.txt", "a", newline="\n") as file:
-        file.write(msg)
+    with open(os.path.expanduser(DEFAULT_LOG_FILE), "a", newline="\n") as file:
+        file.write(msg + "\n")
 
 
 def read_config(path):

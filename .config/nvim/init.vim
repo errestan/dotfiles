@@ -180,8 +180,8 @@ let g:syntastic_python_python_exec = 'python3'
 
 " Use a custom wrapper script to determine which compiler to use for C ans
 " Assembly files.
-let g:syntastic_c_gcc_compiler = '/home/lclark/Development/bin/gcc-wrapper'
-let g:syntastic_asm_compiler = '/home/lclark/Development/bin/gcc-wrapper'
+let g:syntastic_c_compiler = '~/.local/bin/gcc-wrapper'
+let g:syntastic_asm_compiler = '~/.local/bin/gcc-wrapper'
 
 " Set the name of the configuration file Syntastic will use to find C and CPP
 " flags for C files.
