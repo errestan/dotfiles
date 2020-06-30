@@ -31,13 +31,8 @@ alias egrep='egrep --color=auto'
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
-# Add exports from your profile
-source ~/.profile
-
 # Source FZF key bindings if they exist.
-if [ -f $FZF_ZSH_PATH ]; then
-	source $FZF_ZSH_PATH
-fi
+[ -f $FZF_ZSH_PATH ] && source $FZF_ZSH_PATH
 
 # Do menu-driven completion.
 zstyle ':completion:*' menu yes select

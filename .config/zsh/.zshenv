@@ -21,8 +21,15 @@ if [ -f "${HOME}/.gpg-agent-info" ]; then
      export SSH_AGENT_PID
 fi
 
-# coloured GCC warnings and errors
+# Coloured GCC warnings and errors
 GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 # Set FZF path.
 FZF_ZSH_PATH="/usr/share/doc/fzf/examples/key-bindings.zsh"
+
+# Set PATH so it includes user's private binary directory if it exists
+[ -d "$HOME/.local/bin" ] && export PATH="$HOME/.local/bin:$PATH"
+
+# If present source a local ZSH environment file.
+ZSHENV_LOCAL="$ZDOTDIR/.zshenv.local"
+[ -f "$ZSHENV_LOCAL" ] && . $ZSHENV_LOCAL
