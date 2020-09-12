@@ -3,7 +3,7 @@
 export ZDOTDIR="${${(%):-%x}:P:h}"
 
 # Set directory for Z-Plug.
-export ZPLUG_HOMD="$HOME/.config/zplug"
+export ZPLUG_HOME="$HOME/.config/zplug"
 
 # Android NDK toolchain path(s).
 ANDROID_NDK="/opt/android"
