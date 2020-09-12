@@ -2,6 +2,9 @@
 # of the ".zshenv" symbolic link. Note: This is a crazy expression from Redit!
 export ZDOTDIR="${${(%):-%x}:P:h}"
 
+# Set directory for Z-Plug.
+export ZPLUG_HOMD="$HOME/.config/zplug"
+
 # Android NDK toolchain path(s).
 ANDROID_NDK="/opt/android"
 ANDROID_NDK_32="$ANDROID_NDK/current-arm32/bin"

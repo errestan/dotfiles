@@ -59,3 +59,22 @@ setopt auto_pushd
 
 # Don't push the same dir twice.
 setopt pushd_ignore_dups
+
+
+# Z-Plug Configuration
+
+source /usr/share/zplug/init.zsh
+
+# FZF Git completion.
+zplug "hschne/fzf-git"
+
+# Install plugins if there are plugins that have not been installed
+if ! zplug check --verbose; then
+    printf "Install? [y/N]: "
+    if read -q; then
+        echo; zplug install
+    fi
+fi
+
+# Then, source plugins and add commands to $PATH
+zplug load --verbose
