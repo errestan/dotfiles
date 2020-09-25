@@ -57,7 +57,7 @@ compinit
 # Make cd push the old directory onto the directory stack.
 setopt auto_pushd
 
-# Don't push the same dir twice.
+# Don't push the same directory twice.
 setopt pushd_ignore_dups
 
 
@@ -68,7 +68,7 @@ source /usr/share/zplug/init.zsh
 # FZF Git completion.
 zplug "hschne/fzf-git"
 
-# Install plugins if there are plugins that have not been installed
+# Install plug-ins if there are plug-ins that have not been installed.
 if ! zplug check --verbose; then
     printf "Install? [y/N]: "
     if read -q; then
@@ -76,5 +76,5 @@ if ! zplug check --verbose; then
     fi
 fi
 
-# Then, source plugins and add commands to $PATH
-zplug load --verbose
+# Then, source plug-ins and add commands to $PATH
+zplug load
