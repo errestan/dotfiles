@@ -23,7 +23,7 @@ map <S-e> :NERDTreeToggle<CR>
 " Map common commands to leader shortcuts.
 map <Leader>w :w<CR>
 map <Leader>c :bdel<CR>
-map <Leader>r :source $MYVIMRC<CR>
+map <Leader>r :call config#ReloadVIMRC()<CR>
 
 " Map short cuts to jump to buffers.
 nnoremap <Leader>1 :1b<CR>
