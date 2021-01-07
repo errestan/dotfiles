@@ -4,11 +4,11 @@ source ~/.config/nvim/functions.vim
 " General configuration.
 source ~/.config/nvim/general.vim
 
-" Colour scheme settings.
-source ~/.config/nvim/colours.vim
-
 " Plug-in manager and plug-in declaration.
 source ~/.config/nvim/plugins.vim
+
+" Colour scheme settings.
+source ~/.config/nvim/colours.vim
 
 " Configure plug-ins.
 source ~/.config/nvim/black.vim
