@@ -5,10 +5,6 @@
 " 24-bit colour support.
 set termguicolors
 
-" Select colour scheme.
-set background=dark
-colorscheme PaperColor
-
 " Set Paper Color Theme settings. Enable bold and italics.
 let g:PaperColor_Theme_Options = {
   \   'theme': {
@@ -18,3 +14,11 @@ let g:PaperColor_Theme_Options = {
   \     }
   \   }
   \ }
+
+" Set GruvBox theme settings.
+let g:gruvbox_italic = 1
+let g:gruvbox_contrast_dark = 'hard'
+
+" Select colour scheme.
+set background=dark
+colorscheme gruvbox

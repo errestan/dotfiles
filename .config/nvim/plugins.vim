@@ -51,5 +51,6 @@ silent! if plug#begin()
     " Python code formatter.
     Plug 'psf/black', { 'tag': '19.10b0' }
 
+    Plug 'morhetz/gruvbox'
     call plug#end()
 endif
