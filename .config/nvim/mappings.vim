@@ -2,7 +2,7 @@
 "  Keyboard Shortcuts.
 "
 
-" Set the "Leader" key to space bar.
+" Set the 'Leader' key to space bar.
 let mapleader = " "
 
 " Buffer shortcuts.
@@ -52,4 +52,3 @@ noremap <silent> <leader>gz :GscopeFind z <C-R><C-W><cr>
 " FZF Key-bindings.
 noremap <Leader>f :GFiles --recurse-submodules<CR>
 noremap <Leader>t :Tags<CR>
-

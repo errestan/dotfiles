@@ -29,4 +29,3 @@ set expandtab
 
 " Enable syntax highlighting.
 syntax enable
-
