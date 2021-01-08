@@ -14,5 +14,6 @@ source ~/.config/nvim/colours.vim
 source ~/.config/nvim/black.vim
 source ~/.config/nvim/airline.vim
 source ~/.config/nvim/nerdtree.vim
-source ~/.config/nvim/gutentags.vim
-source ~/.config/nvim/syntastic.vim
+
+" Configure LSP.
+source ~/.config/nvim/lsp.vim

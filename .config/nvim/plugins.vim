@@ -28,22 +28,12 @@ silent! if plug#begin()
     " Restore cursor to last place in file.
     Plug 'farmergreg/vim-lastplace'
 
-    " Syntax highlighting.
-    Plug 'vim-syntastic/syntastic'
-
-    " Python auto-completion.
-    Plug 'davidhalter/jedi-vim'
-
     " FZF - Fuzzy find plug-ins.
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
 
     " Git plug-in.
     Plug 'tpope/vim-fugitive'
-
-    " Plug-ins to improve tag behaviour.
-    Plug 'ludovicchabant/vim-gutentags'
-    Plug 'skywind3000/gutentags_plus'
 
     " Comment plug-in.
     Plug 'tpope/vim-commentary'
@@ -52,5 +42,8 @@ silent! if plug#begin()
     Plug 'psf/black', { 'tag': '19.10b0' }
 
     Plug 'morhetz/gruvbox'
+
+    " NeoVIM LSP configuration.
+    Plug 'neovim/nvim-lspconfig'
     call plug#end()
 endif
