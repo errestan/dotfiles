@@ -1,6 +1,9 @@
 " Custom Vim functions.
 source ~/.config/nvim/functions.vim
 
+" Custom keyboard shortcuts.
+source ~/.config/nvim/mappings.vim
+
 " General configuration.
 source ~/.config/nvim/general.vim
 
