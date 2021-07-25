@@ -2,14 +2,19 @@
 plugins=(zsh-autosuggestions git docker docker-compose zsh-syntax-highlighting apt)
 
 # Enable customized shell prompt.
-autoload -Uz promptinit
-promptinit
+autoload -Uz promptinit; promptinit
 
 # Load custom prompt.
-. "$ZDOTDIR/.prompt"
+. "$ZDOTDIR/prompt.zsh"
 
 # Ignore duplicate commands and share history across sessions.
 setopt histignorealldups sharehistory
+
+# Make cd push the old directory onto the directory stack.
+setopt auto_pushd
+
+# Don't push the same directory twice.
+setopt pushd_ignore_dups
 
 # Set command history to be saved to a specific file.
 HISTFILE=~"/.hist_file"
@@ -17,6 +22,10 @@ HISTFILE=~"/.hist_file"
 # Keep lots of command history.
 HISTSIZE=10000000
 SAVEHIST=10000000
+
+# Configure FZF to use a TMux pane.
+FZF_TMUX=1
+FZF_TMUX_OPTS="-p"
 
 # Enable Vim mode for command editing.
 bindkey -v
@@ -31,35 +40,14 @@ alias egrep='egrep --color=auto'
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
+# Source ZSH completion configuration.
+[ -f $ZDOTDIR/completion.zsh ] && source $ZDOTDIR/completion.zsh
+
 # Source FZF key bindings if they exist.
-[ -f $FZF_ZSH_PATH ] && source $FZF_ZSH_PATH
+[ -f $ZDOTDIR/fzf.zsh ] && source $ZDOTDIR/fzf.zsh
 
-# Do menu-driven completion.
-zstyle ':completion:*' menu yes select
-
-# Colour completion for some things.
-zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
-
-# Formatting and messages.
-zstyle ':completion:*' verbose yes
-zstyle ':completion:*:descriptions' format "$fg[yellow]%B--- %d%b"
-zstyle ':completion:*:messages' format '%d'
-zstyle ':completion:*:warnings' format "$fg[red]No matches for:$reset_color %d"
-zstyle ':completion:*:corrections' format '%B%d (errors: %e)%b'
-zstyle ':completion:*' group-name ''
-
-# Set file used by compinstall.
-zstyle :compinstall filename '/home/lclark/.config/zsh/.zshrc'
-
-autoload -Uz compinit
-compinit
-
-# Make cd push the old directory onto the directory stack.
-setopt auto_pushd
-
-# Don't push the same directory twice.
-setopt pushd_ignore_dups
-
+# Source a local ZSH configuration file.
+[ -f $ZDOTDIR/.zshrc.local ] && source $ZDOTDIR/.zshrc.local
 
 # Z-Plug Configuration
 
