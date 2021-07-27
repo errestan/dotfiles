@@ -27,6 +27,4 @@ zstyle ':completion:*:warnings' format "$fg[red]No matches for:$reset_color %d"
 zstyle ':completion:*:corrections' format '%B%d (errors: %e)%b'
 
 # Set file used by compinstall.
-zstyle :compinstall filename '/home/lclark/.config/zsh/.zshrc'
-
-
+zstyle :compinstall filename "$XDG_CONFIG_HOME/zsh/.zshrc"

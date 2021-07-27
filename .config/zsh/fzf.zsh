@@ -5,9 +5,7 @@ if [[ ! "$PATH" == */home/lclark/Development/src/fzf/bin* ]]; then
 fi
 
 # Auto-completion
-# ---------------
-[[ $- == *i* ]] && source "/home/lclark/Development/src/fzf/shell/completion.zsh" 2> /dev/null
+[[ $- == *i* ]] && [ -f "$HOME/Development/src/fzf/shell/completion.zsh" ] && source "$HOME/Development/src/fzf/shell/completion.zsh" 2> /dev/null
 
 # Key bindings
-# ------------
-source "/home/lclark/Development/src/fzf/shell/key-bindings.zsh"
+[ -f "$HOME/Development/src/fzf/shell/key-bindings.zsh" ] && source "$HOME/Development/src/fzf/shell/key-bindings.zsh"

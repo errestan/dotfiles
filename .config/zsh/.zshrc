@@ -17,7 +17,7 @@ setopt auto_pushd
 setopt pushd_ignore_dups
 
 # Set command history to be saved to a specific file.
-HISTFILE=~"/.hist_file"
+HISTFILE="$HOME/.hist_file"
 
 # Keep lots of command history.
 HISTSIZE=10000000
@@ -40,14 +40,13 @@ alias egrep='egrep --color=auto'
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
+alias vi=nvim
+
 # Source ZSH completion configuration.
 [ -f $ZDOTDIR/completion.zsh ] && source $ZDOTDIR/completion.zsh
 
 # Source FZF key bindings if they exist.
 [ -f $ZDOTDIR/fzf.zsh ] && source $ZDOTDIR/fzf.zsh
-
-# Source a local ZSH configuration file.
-[ -f $ZDOTDIR/.zshrc.local ] && source $ZDOTDIR/.zshrc.local
 
 # Z-Plug Configuration
 
@@ -66,3 +65,6 @@ fi
 
 # Then, source plug-ins and add commands to $PATH
 zplug load
+
+# Source a local ZSH configuration file.
+[ -f $ZDOTDIR/.zshrc.local ] && source $ZDOTDIR/.zshrc.local
