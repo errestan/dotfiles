@@ -1,3 +1,9 @@
+-- Set the line width.
+vim.bo.textwidth = 110
+
+-- Show a vertical line at the maximum line length.
+vim.wo.colorcolumn = "110"
+
 -- Always use UTF-8.
 vim.o.encoding = 'utf-8'
 
