@@ -27,3 +27,10 @@ utils.map('n', '<Leader>7', '<cmd>7b<CR>')
 utils.map('n', '<Leader>8', '<cmd>8b<CR>')
 utils.map('n', '<Leader>9', '<cmd>9b<CR>')
 utils.map('n', '<Leader>0', '<cmd>10b<CR>')
+
+-- Fuzzy find buffer.
+utils.map('n', '<Leader>fb', '<cmd>Telescope buffers<CR>')
+
+-- Fuzzy find files tracked by Git.
+utils.map('n', '<Leader>fg', '<cmd>Telescope git_files<CR>')
+

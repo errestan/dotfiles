@@ -36,3 +36,6 @@ vim.o.syntax = 'enable'
 
 -- Turn syntax highlighting on.
 vim.g.syntax_on = 1
+
+-- Enable syntax highlighting.
+vim.cmd("syntax on")
