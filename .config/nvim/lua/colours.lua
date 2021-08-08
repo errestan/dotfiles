@@ -1,8 +1,8 @@
 -- Enable 24-bit colour support.
 vim.o.termguicolors = true
 
--- Select colour scheme.
-vim.o.background = 'dark'
+-- Set colour scheme options.
+vim.g.tokyonight_style = "night"
 
--- Activate GitHub theme.
-require('github-theme').setup()
+-- Set colour Scheme.
+vim.cmd[[colorscheme tokyonight]]

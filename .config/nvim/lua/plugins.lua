@@ -42,7 +42,7 @@ return require('packer').startup(function()
   use {'psf/black', tag = '19.10b0'}
 
   -- Colour schemes and themes.
-  use 'projekt0n/github-nvim-theme'
+  use 'folke/tokyonight.nvim'
 
   -- Plugin to reload NeoVim cofiguration.
   use {
@@ -61,6 +61,9 @@ return require('packer').startup(function()
     'nvim-telescope/telescope-fzf-native.nvim',
     run = 'make'
   }
+
+  -- Buffer Line.
+  use {'akinsho/nvim-bufferline.lua', requires = 'kyazdani42/nvim-web-devicons'}
 
   -- Status line plugin.
   use {
