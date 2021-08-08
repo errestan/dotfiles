@@ -39,3 +39,6 @@ vim.g.syntax_on = 1
 
 -- Enable syntax highlighting.
 vim.cmd("syntax on")
+
+-- Enable the file type detection.
+vim.cmd("filetype plugin indent on")
