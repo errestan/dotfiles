@@ -48,23 +48,28 @@ alias vi=nvim
 # Source FZF key bindings if they exist.
 [ -f $ZDOTDIR/fzf.zsh ] && source $ZDOTDIR/fzf.zsh
 
-# Z-Plug Configuration
-
-source /usr/share/zplug/init.zsh
-
-# FZF Git completion.
-zplug "hschne/fzf-git"
-
-# Install plug-ins if there are plug-ins that have not been installed.
-if ! zplug check --verbose; then
-    printf "Install? [y/N]: "
-    if read -q; then
-        echo; zplug install
-    fi
-fi
-
-# Then, source plug-ins and add commands to $PATH
-zplug load
-
 # Source a local ZSH configuration file.
 [ -f $ZDOTDIR/.zshrc.local ] && source $ZDOTDIR/.zshrc.local
+
+# Z-Plug Configuration.
+ZPLUG_PATH="/usr/share/zplug/init.zsh"
+[ -f $ZPLUG_PATH ] && source $ZPLUG_PATH
+
+zplug 2>&1 > /dev/null
+if [ $? -eq 0 ]; then
+    # FZF Git completion.
+    zplug "hschne/fzf-git"
+
+    # Install plug-ins if there are plug-ins that have not been installed.
+    if ! zplug check --verbose; then
+        printf "Install? [y/N]: "
+        if read -q; then
+            echo; zplug install
+        fi
+    fi
+
+    # Then, source plug-ins and add commands to $PATH
+    zplug load
+else
+    echo "Error: ZPlug not installed" 2>&1
+fi
