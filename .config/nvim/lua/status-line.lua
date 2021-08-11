@@ -1,6 +1,6 @@
 -- Set status line options.
 options = {
-  theme = 'tokyonight'
+  theme = 'gruvbox'
 }
 
 -- Enable the lualine status line.

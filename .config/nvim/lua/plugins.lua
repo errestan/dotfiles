@@ -42,7 +42,7 @@ return require('packer').startup(function()
   use {'psf/black', tag = '19.10b0'}
 
   -- Colour schemes and themes.
-  use 'folke/tokyonight.nvim'
+  use {"npxbr/gruvbox.nvim", requires = {"rktjmp/lush.nvim"}}
 
   -- Plugin to reload NeoVim cofiguration.
   use {
