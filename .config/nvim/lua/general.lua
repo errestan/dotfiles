@@ -31,14 +31,5 @@ vim.o.shiftwidth = 4
 vim.o.expandtab = true
 vim.o.smartindent = true
 
--- Enable syntax highlighting.
-vim.o.syntax = 'enable'
-
--- Turn syntax highlighting on.
-vim.g.syntax_on = 1
-
--- Enable syntax highlighting.
-vim.cmd("syntax on")
-
--- Enable the file type detection.
-vim.cmd("filetype plugin indent on")
+-- Always show the gutter.
+vim.o.signcolumn = "yes"

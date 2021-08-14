@@ -21,4 +21,6 @@ require('tree-sitter')
 -- Configure key mappings.
 require('mappings')
 
--- TODO: Need a way to include a init.lua.local file if it exists.
+-- Source a local configuration file it exists.
+utils = require('utils')
+utils.source_if_exists("init.local.lua")

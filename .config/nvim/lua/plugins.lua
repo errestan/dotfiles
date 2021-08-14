@@ -1,73 +1,86 @@
 -- Automatically install Packer if it isn't already installed.
-local execute = vim.api.nvim_command
-local fn = vim.fn
+local install_url = "https://github.com/wbthomason/packer.nvim"
+local install_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 
-local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
-
-if fn.empty(fn.glob(install_path)) > 0 then
-  fn.system({'git', 'clone', 'https://github.com/wbthomason/packer.nvim', install_path})
-  execute 'packadd packer.nvim'
+if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
+  vim.fn.system({'git', 'clone', install_url, install_path})
+  vim.api.nvim_command("packadd packer.nvim")
 end
 
 -- Automatically update when plugins.lua is written to.
-vim.cmd([[autocmd BufWritePost plugins.lua source <afile> | PackerCompile]])
+vim.cmd("autocmd BufWritePost plugins.lua source <afile> | PackerCompile")
 
--- Initialise the Packer package manager.
-return require('packer').startup(function()
-  -- Let Packer manage itself.
-  use 'wbthomason/packer.nvim'
+options = {
+    display = {
+        open_fn = require('packer.util').float,
+    }
+}
 
-  -- NeoVim LSP configuration.
-  use 'neovim/nvim-lspconfig'
+-- Function containing plug-ins to install.
+plugin_list = function()
+    -- Let Packer manage itself.
+    use 'wbthomason/packer.nvim'
 
-  -- LSP Auto-completion.
-  use 'hrsh7th/nvim-compe'
+    -- NeoVim LSP configuration.
+    use 'neovim/nvim-lspconfig'
 
-  -- LSP Utilities.
-  use 'glepnir/lspsaga.nvim'
+    -- LSP Auto-completion.
+    use 'hrsh7th/nvim-compe'
 
-  -- Enable tree-sitter.
-  use {
+    -- LSP Utilities.
+    use 'glepnir/lspsaga.nvim'
+
+    -- Enable tree-sitter.
+    use {
         'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdate'
-  }
+    }
 
-  -- Restore cursor to last place in file.
-  use 'farmergreg/vim-lastplace'
+    -- Restore cursor to last place in file.
+    use 'farmergreg/vim-lastplace'
 
-  -- Automatic comment and uncomment code.
-  use 'tpope/vim-commentary'
+    -- Automatic comment and uncomment code.
+    use 'tpope/vim-commentary'
 
-  -- Python code formatter.
-  use {'psf/black', tag = '19.10b0'}
+    -- Python code formatter.
+    use {'psf/black', tag = '19.10b0'}
 
-  -- Colour schemes and themes.
-  use {"npxbr/gruvbox.nvim", requires = {"rktjmp/lush.nvim"}}
+    -- Colour schemes and themes.
+    use {"npxbr/gruvbox.nvim", requires = {"rktjmp/lush.nvim"}}
 
-  -- Plugin to reload NeoVim cofiguration.
-  use {
-    'famiu/nvim-reload',
-    requires = {'nvim-lua/plenary.nvim'}
-  }
+    -- Plugin to reload NeoVim cofiguration.
+    use {
+        'famiu/nvim-reload',
+        requires = {'nvim-lua/plenary.nvim'}
+    }
 
-  -- Telescope: fuzzy searching plugin.
-  use {
-    'nvim-telescope/telescope.nvim',
-    requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}
-  }
+    -- Telescope: fuzzy searching plugin.
+    use {
+        'nvim-telescope/telescope.nvim',
+        requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}
+    }
 
-  -- Telescope extension to use FZF as the fuzzy finder.
-  use {
-    'nvim-telescope/telescope-fzf-native.nvim',
-    run = 'make'
-  }
+    -- Telescope extension to use FZF as the fuzzy finder.
+    use {
+        'nvim-telescope/telescope-fzf-native.nvim',
+        run = 'make'
+    }
 
-  -- Buffer Line.
-  use {'akinsho/nvim-bufferline.lua', requires = 'kyazdani42/nvim-web-devicons'}
+    -- Buffer Line.
+    use {'akinsho/nvim-bufferline.lua', requires = 'kyazdani42/nvim-web-devicons'}
 
-  -- Status line plugin.
-  use {
-    'hoob3rt/lualine.nvim',
-    requires = {'kyazdani42/nvim-web-devicons', opt = true}
-  }
-end)
+    -- Status line plugin.
+    use {
+        'hoob3rt/lualine.nvim',
+        requires = {'kyazdani42/nvim-web-devicons', opt = true}
+    }
+end
+
+-- Wrap the plugin function and options in a table.
+spec = {
+    plugin_list,
+    config = options
+}
+
+-- Initialise the Packer package manager.
+require('packer').startup(spec)
