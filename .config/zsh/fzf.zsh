@@ -1,7 +1,7 @@
 # Setup fzf
 # ---------
-if [[ ! "$PATH" == */home/lclark/Development/src/fzf/bin* ]]; then
-  export PATH="${PATH:+${PATH}:}/home/lclark/Development/src/fzf/bin"
+if [[ ! "$PATH" == */$HOME/Development/src/fzf/bin* ]]; then
+  export PATH="${PATH:+${PATH}:}$HOME/Development/src/fzf/bin"
 fi
 
 # Auto-completion

@@ -3,5 +3,6 @@
 	name = Lee
 [core]
 	editor = nvim
+    excludesFile = ~/.config/git/exclude.conf
 [include]
     path = ~/.config/git/config.local

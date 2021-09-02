@@ -11,6 +11,13 @@ end
 vim.cmd("autocmd BufWritePost plugins.lua source <afile> | PackerCompile")
 
 options = {
+    git = {
+        subcommands = {
+            install = "clone --no-single-branch --progress",
+            fetch = "fetch --progress"
+        },
+        default_url_format = "http://github.com/%s"
+    },
     display = {
         open_fn = require('packer.util').float,
     }
