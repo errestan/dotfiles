@@ -32,10 +32,18 @@ plugin_list = function()
     use 'neovim/nvim-lspconfig'
 
     -- LSP Auto-completion.
-    use 'hrsh7th/nvim-compe'
+    use 'neovim/nvim-lspconfig'
+    use 'hrsh7th/cmp-nvim-lsp'
+    use 'hrsh7th/cmp-buffer'
+    use 'hrsh7th/cmp-path'
+    use 'hrsh7th/cmp-cmdline'
+    use 'hrsh7th/nvim-cmp'
 
+    -- Completion formatter.
+    use 'onsails/lspkind-nvim'
+--
     -- LSP Utilities.
-    use 'glepnir/lspsaga.nvim'
+    use 'tami5/lspsaga.nvim'
 
     -- Enable tree-sitter.
     use {
