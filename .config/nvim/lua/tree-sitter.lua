@@ -1,6 +1,7 @@
 -- Enable folding.
 vim.o.foldmethod = 'expr'
 vim.o.foldexpr = 'nvim_treesitter#foldexpr()'
+vim.o.foldlevelstart = 99
 
 require'nvim-treesitter.configs'.setup {
   ensure_installed = "maintained",
@@ -23,4 +24,3 @@ require'nvim-treesitter.configs'.setup {
     enable = true
   }
 }
-
