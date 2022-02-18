@@ -55,9 +55,11 @@ plugin_list = function()
     use 'farmergreg/vim-lastplace'
 
     -- Automatic comment and uncomment code.
+    -- TODO: Switch to comment.nvim.
     use 'tpope/vim-commentary'
 
     -- Python code formatter.
+    -- TODO: There is a more generic format plug-in.
     use {'psf/black', tag = '19.10b0'}
 
     -- Colour schemes and themes.

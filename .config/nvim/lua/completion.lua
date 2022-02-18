@@ -2,7 +2,7 @@
 vim.o.completeopt = "menu,menuone,noselect"
 
 -- Enable LSP Kind formatter.
-local lspkind = require('lspkind')
+--local lspkind = require('lspkind')
 
 -- Setup 'nvim-cmp'.
 local cmp = require('cmp')
@@ -19,9 +19,9 @@ config = {
         }),
         ['<CR>'] = cmp.mapping.confirm({ select = true }),
     },
-    formatting = {
-        format = lspkind.cmp_format({with_text = true, preset = 'default', maxwidth = 50})
-    },
+    -- formatting = {
+    --     format = lspkind.cmp_format({with_text = true, preset = 'default', maxwidth = 50})
+    -- },
     sources = cmp.config.sources({
         { name = 'nvim_lsp' },
         { name = 'buffer' }
