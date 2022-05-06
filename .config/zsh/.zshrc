@@ -52,7 +52,7 @@ alias vi=nvim
 [ -f $ZDOTDIR/.zshrc.local ] && source $ZDOTDIR/.zshrc.local
 
 # Z-Plug Configuration.
-ZPLUG_PATH="/usr/share/zplug/init.zsh"
+ZPLUG_PATH="$HOME/.zplug/init.zsh"
 [ -f $ZPLUG_PATH ] && source $ZPLUG_PATH
 
 zplug 2>&1 > /dev/null

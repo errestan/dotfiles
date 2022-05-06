@@ -1,3 +1,6 @@
+# Set default text editor.
+EDITOR=nvim
+
 # Android NDK toolchain path(s).
 ANDROID_NDK="/opt/android"
 ANDROID_NDK_32="$ANDROID_NDK/current-arm32/bin"
