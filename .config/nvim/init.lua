@@ -10,13 +10,19 @@ require('lsp')
 -- Configure colours and theme.
 require('colours')
 
+-- Enable Comment.nvim.
+require('Comment').setup()
+
 -- Configure installed plug-ins.
-require('black')
 require('completion')
 require('fuzzy-find')
+require('git')
 require('buffer-line')
 require('status-line')
 require('tree-sitter')
+
+-- Misc configuration.
+require('misc')
 
 -- Configure key mappings.
 require('mappings')

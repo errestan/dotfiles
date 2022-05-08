@@ -9,7 +9,7 @@ vim.o.encoding = 'utf-8'
 
 -- Enable relative line numbering.
 vim.o.number = true
-vim.o.relativenumber = true
+vim.o.relativenumber = false
 
 -- Highlight the current line.
 vim.o.cursorline = true
@@ -33,3 +33,13 @@ vim.o.smartindent = true
 
 -- Always show the gutter.
 vim.o.signcolumn = "yes"
+
+-- Save undo history
+vim.opt.undofile = true
+
+-- Enable break indent, not sure what this does.
+vim.o.breakindent = true
+
+-- Case insensitive searching UNLESS C or capital in search.
+vim.o.ignorecase = true
+vim.o.smartcase = true
