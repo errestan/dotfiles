@@ -92,7 +92,7 @@ plugin_list = function()
     }
 
     -- Buffer Line.
-    use {'akinsho/nvim-bufferline.lua', requires = 'kyazdani42/nvim-web-devicons'}
+    use {'akinsho/bufferline.nvim', tag = "v2.*", requires = 'kyazdani42/nvim-web-devicons'}
 
     -- Status line plugin.
     use {
