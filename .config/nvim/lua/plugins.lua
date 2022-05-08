@@ -1,14 +1,15 @@
 -- Automatically install Packer if it isn't already installed.
 local install_url = "https://github.com/wbthomason/packer.nvim"
-local install_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
+local install_dir = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 
-if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-  vim.fn.system({'git', 'clone', install_url, install_path})
+if vim.fn.empty(vim.fn.glob(install_dir)) > 0 then
+  vim.fn.system({'git', 'clone', install_url, install_dir})
   vim.api.nvim_command("packadd packer.nvim")
 end
 
 -- Automatically update when plugins.lua is written to.
-vim.cmd("autocmd BufWritePost plugins.lua source <afile> | PackerCompile")
+local packer_group = vim.api.nvim_create_augroup('Packer', { clear = true })
+vim.api.nvim_create_autocmd('BufWritePost', { command = 'source <afile> | PackerCompile', group = packer_group, pattern = 'init.lua' })
 
 options = {
     git = {
@@ -32,12 +33,22 @@ plugin_list = function()
     use 'neovim/nvim-lspconfig'
 
     -- LSP Auto-completion.
-    use 'neovim/nvim-lspconfig'
     use 'hrsh7th/cmp-nvim-lsp'
     use 'hrsh7th/cmp-buffer'
     use 'hrsh7th/cmp-path'
     use 'hrsh7th/cmp-cmdline'
+    use 'saadparwaiz1/cmp_luasnip'
     use 'hrsh7th/nvim-cmp'
+
+    -- Plug-in for Snippet support.
+    use 'L3MON4D3/LuaSnip'
+
+    -- Better Tag support.
+    use 'ludovicchabant/vim-gutentags'
+
+    -- Git Integration.
+    use 'tpope/vim-fugitive'
+    use { 'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' } }   
 
     -- Completion formatter.
     use 'onsails/lspkind-nvim'
@@ -50,20 +61,17 @@ plugin_list = function()
         'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdate'
     }
+    use 'nvim-treesitter/nvim-treesitter-textobjects'
 
     -- Restore cursor to last place in file.
     use 'farmergreg/vim-lastplace'
 
     -- Automatic comment and uncomment code.
-    -- TODO: Switch to comment.nvim.
-    use 'tpope/vim-commentary'
-
-    -- Python code formatter.
-    -- TODO: There is a more generic format plug-in.
-    use {'psf/black', tag = '19.10b0'}
+    use 'numToStr/Comment.nvim'
 
     -- Colour schemes and themes.
     use {"npxbr/gruvbox.nvim", requires = {"rktjmp/lush.nvim"}}
+    use 'mjlbach/onedark.nvim'
 
     -- Plugin to reload NeoVim cofiguration.
     use {
@@ -91,6 +99,9 @@ plugin_list = function()
         'hoob3rt/lualine.nvim',
         requires = {'kyazdani42/nvim-web-devicons', opt = true}
     }
+
+    -- Plug-in to show indentation levels.
+    use 'lukas-reineke/indent-blankline.nvim'
 end
 
 -- Wrap the plugin function and options in a table.

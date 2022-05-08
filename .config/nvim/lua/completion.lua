@@ -1,73 +1,65 @@
 -- This is required for 'nvim-compe' to work.
 vim.o.completeopt = "menu,menuone,noselect"
 
+-- Setup th luasnip plug-in.
+local luasnip = require('luasnip')
+
 -- Enable LSP Kind formatter.
---local lspkind = require('lspkind')
+local lspkind = require('lspkind')
 
 -- Setup 'nvim-cmp'.
 local cmp = require('cmp')
 
 config = {
-    mapping = {
-        ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
-        ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
-        ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
-        ['<C-y>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
-        ['<C-e>'] = cmp.mapping({
-            i = cmp.mapping.abort(),
-            c = cmp.mapping.close(),
-        }),
-        ['<CR>'] = cmp.mapping.confirm({ select = true }),
+    snippet = {
+        expand = function(args)
+            luasnip.lsp_expand(args.body)
+        end,
     },
-    -- formatting = {
-    --     format = lspkind.cmp_format({with_text = true, preset = 'default', maxwidth = 50})
-    -- },
-    sources = cmp.config.sources({
+    mapping = cmp.mapping.preset.insert({
+        ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+        ['<C-f>'] = cmp.mapping.scroll_docs(4),
+        ['<C-Space>'] = cmp.mapping.complete(),
+        ['<CR>'] = cmp.mapping.confirm({
+            behavior = cmp.ConfirmBehavior.Replace,
+            select = true,
+        }),
+        ['<Tab>'] = cmp.mapping(
+            function(fallback)
+                if cmp.visible() then
+                    cmp.select_next_item()
+                elseif luasnip.expand_or_jumpable() then
+                    luasnip.expand_or_jump()
+                else
+                    fallback()
+                end
+            end,
+            { 'i', 's' }
+        ),
+        ['<S-Tab>'] = cmp.mapping(
+            function(fallback)
+                if cmp.visible() then
+                    cmp.select_prev_item()
+                elseif luasnip.jumpable(-1) then
+                    luasnip.jump(-1)
+                else
+                    fallback()
+                end
+            end,
+            { 'i', 's' }
+        ),
+    }),
+    formatting = {
+        format = lspkind.cmp_format({
+            mode = 'symbol', -- show only symbol annotations
+            maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+        })
+    },
+    sources = {
         { name = 'nvim_lsp' },
+        { name = 'luasnip' },
         { name = 'buffer' }
-    })
+    },
 }
 
 cmp.setup(config)
-
--- Setup LSP Configuration.
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-require('lspconfig')['clangd'].setup({capabilities = capabilities})
-require('lspconfig')['pyright'].setup({capabilities = capabilities})
-require('lspconfig')['bashls'].setup({capabilities = capabilities})
-
--- Setup LSP Saga.
-local lspsaga = require('lspsaga')
-
-lspsaga.setup({
-    -- defaults ...
-    debug = false,
-    use_saga_diagnostic_sign = true,
-    -- code action title icon
-    code_action_prompt = {
-        enable = true,
-        sign = true,
-        sign_priority = 40,
-        virtual_text = true,
-    },
-    max_preview_lines = 10,
-    finder_action_keys = {
-        open = "o",
-        vsplit = "s",
-        split = "i",
-        quit = "q",
-        scroll_down = "<C-f>",
-        scroll_up = "<C-b>",
-    },
-    code_action_keys = {
-        quit = "q",
-        exec = "<CR>",
-    },
-    rename_action_keys = {
-        quit = "<C-c>",
-        exec = "<CR>",
-    },
-    border_style = "single",
-    rename_prompt_prefix = "➤",
-    diagnostic_prefix_format = "%d. ",
-})
