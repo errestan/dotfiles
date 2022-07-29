@@ -40,6 +40,9 @@ plugin_list = function()
     use 'saadparwaiz1/cmp_luasnip'
     use 'hrsh7th/nvim-cmp'
 
+    -- LSP Formatting.
+    use "lukas-reineke/lsp-format.nvim"
+
     -- Plug-in for Snippet support.
     use 'L3MON4D3/LuaSnip'
 
@@ -71,7 +74,8 @@ plugin_list = function()
 
     -- Colour schemes and themes.
     use {"npxbr/gruvbox.nvim", requires = {"rktjmp/lush.nvim"}}
-    use 'mjlbach/onedark.nvim'
+    use "mjlbach/onedark.nvim"
+    use {"tjdevries/gruvbuddy.nvim", requires = {"tjdevries/colorbuddy.vim"}}
 
     -- Plugin to reload NeoVim cofiguration.
     use {

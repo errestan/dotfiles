@@ -1,6 +1,11 @@
 local lspconfig = require('lspconfig')
 
+require('lsp-format').setup()
+
 local on_attach = function(client, bufnr)
+    -- Enable LSP Formatting.
+    require('lsp-format').on_attach(client)
+
     local opts = { buffer = bufnr }
 
     vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
