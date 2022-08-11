@@ -4,5 +4,7 @@
 [core]
 	editor = nvim
     excludesFile = ~/.config/git/exclude.conf
+[init]
+    defaultBranch = main
 [include]
     path = ~/.config/git/config.local
