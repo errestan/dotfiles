@@ -30,6 +30,9 @@ FZF_TMUX_OPTS="-p"
 # Enable Vim mode for command editing.
 bindkey -v
 
+# Accept auto-suggestion.
+bindkey '^n' autosuggest-accept
+
 # Set-up shell aliases.
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
@@ -59,6 +62,7 @@ zplug 2>&1 > /dev/null
 if [ $? -eq 0 ]; then
     # FZF Git completion.
     zplug "hschne/fzf-git"
+    zplug "zsh-users/zsh-autosuggestions"
 
     # Install plug-ins if there are plug-ins that have not been installed.
     if ! zplug check --verbose; then
