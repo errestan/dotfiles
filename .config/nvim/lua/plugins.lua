@@ -79,30 +79,22 @@ plugin_list = function()
 
     -- Plugin to reload NeoVim cofiguration.
     use {
-        'famiu/nvim-reload',
-        requires = {'nvim-lua/plenary.nvim'}
+        'famiu/nvim-reload', requires = {'nvim-lua/plenary.nvim'}
     }
 
     -- Telescope: fuzzy searching plugin.
     use {
-        'nvim-telescope/telescope.nvim',
-        requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}
+        'nvim-telescope/telescope.nvim', requires = {'nvim-lua/popup.nvim', 'nvim-lua/plenary.nvim'}
     }
 
     -- Telescope extension to use FZF as the fuzzy finder.
-    use {
-        'nvim-telescope/telescope-fzf-native.nvim',
-        run = 'make'
-    }
+    use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 
     -- Buffer Line.
     use {'akinsho/bufferline.nvim', tag = "v2.*", requires = 'kyazdani42/nvim-web-devicons'}
 
     -- Status line plugin.
-    use {
-        'hoob3rt/lualine.nvim',
-        requires = {'kyazdani42/nvim-web-devicons', opt = true}
-    }
+    use { 'hoob3rt/lualine.nvim', requires = {'kyazdani42/nvim-web-devicons', opt = true} }
 
     -- Plug-in to show indentation levels.
     use 'lukas-reineke/indent-blankline.nvim'
