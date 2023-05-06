@@ -4,6 +4,12 @@ plugins=(zsh-autosuggestions git docker docker-compose zsh-syntax-highlighting a
 # Enable customized shell prompt.
 autoload -Uz promptinit; promptinit
 
+# Enable Git info for prompt.
+autoload -Uz vcs_info; precmd() { vcs_info }
+zstyle ':vcs_info:*' enable git
+zstyle ':vcs_info:git:*' formats $'\ue725 %b'
+setopt PROMPT_SUBST
+
 # Load custom prompt.
 . "$ZDOTDIR/prompt.zsh"
 
