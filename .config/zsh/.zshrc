@@ -1,5 +1,5 @@
 # Enable plug-ins.
-plugins=(zsh-autosuggestions git docker docker-compose zsh-syntax-highlighting apt)
+plugins=(zsh-autosuggestions git docker docker-compose zsh-syntax-highlighting apt tmux)
 
 # Enable customized shell prompt.
 autoload -Uz promptinit; promptinit
@@ -69,6 +69,7 @@ if [ $? -eq 0 ]; then
     # FZF Git completion.
     zplug "hschne/fzf-git"
     zplug "zsh-users/zsh-autosuggestions"
+    zplug "zsh-users/zsh-syntax-highlighting", defer:2
 
     # Install plug-ins if there are plug-ins that have not been installed.
     if ! zplug check --verbose; then
