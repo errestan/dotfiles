@@ -7,6 +7,9 @@ require('plugins')
 -- Setup built-in LSP client.
 require('lsp')
 
+-- Configure the Mason LSP Server manager.
+require('lsp_installer')
+
 -- Configure colours and theme.
 require('colours')
 

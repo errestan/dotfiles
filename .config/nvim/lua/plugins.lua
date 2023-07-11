@@ -98,6 +98,10 @@ plugin_list = function()
 
     -- Plug-in to show indentation levels.
     use 'lukas-reineke/indent-blankline.nvim'
+
+    -- Rust Development.
+    use 'williamboman/mason.nvim'    
+    use 'williamboman/mason-lspconfig.nvim'
 end
 
 -- Wrap the plugin function and options in a table.
