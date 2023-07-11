@@ -56,7 +56,8 @@ lua_settings = {
 }
 
 -- Iterate over a table of language servers and initialise them.
-local servers = { { server = "clangd" }, { server = "pyright" }, { server = "bashls" }, { server = "lua_ls", settings = lua_settings }, }
+local servers = { { server = "clangd" }, { server = "pyright" }, { server = "bashls" },
+    { server = "lua_ls", settings = lua_settings }, }
 for _, lsp in ipairs(servers) do
     lspconfig[lsp.server].setup {
         on_attach = on_attach,
@@ -64,3 +65,5 @@ for _, lsp in ipairs(servers) do
         settings = lsp.settings,
     }
 end
+
+require('rust-tools').setup()

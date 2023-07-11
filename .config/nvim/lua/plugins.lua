@@ -3,13 +3,14 @@ local install_url = "https://github.com/wbthomason/packer.nvim"
 local install_dir = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 
 if vim.fn.empty(vim.fn.glob(install_dir)) > 0 then
-  vim.fn.system({'git', 'clone', install_url, install_dir})
-  vim.api.nvim_command("packadd packer.nvim")
+    vim.fn.system({ 'git', 'clone', install_url, install_dir })
+    vim.api.nvim_command("packadd packer.nvim")
 end
 
 -- Automatically update when plugins.lua is written to.
 local packer_group = vim.api.nvim_create_augroup('Packer', { clear = true })
-vim.api.nvim_create_autocmd('BufWritePost', { command = 'source <afile> | PackerCompile', group = packer_group, pattern = 'init.lua' })
+vim.api.nvim_create_autocmd('BufWritePost',
+    { command = 'source <afile> | PackerCompile', group = packer_group, pattern = 'init.lua' })
 
 options = {
     git = {
@@ -51,11 +52,11 @@ plugin_list = function()
 
     -- Git Integration.
     use 'tpope/vim-fugitive'
-    use { 'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' } }   
+    use { 'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' } }
 
     -- Completion formatter.
     use 'onsails/lspkind-nvim'
---
+    --
     -- LSP Utilities.
     use 'tami5/lspsaga.nvim'
 
@@ -73,35 +74,38 @@ plugin_list = function()
     use 'numToStr/Comment.nvim'
 
     -- Colour schemes and themes.
-    use {"npxbr/gruvbox.nvim", requires = {"rktjmp/lush.nvim"}}
+    use { "npxbr/gruvbox.nvim", requires = { "rktjmp/lush.nvim" } }
     use "mjlbach/onedark.nvim"
-    use {"tjdevries/gruvbuddy.nvim", requires = {"tjdevries/colorbuddy.vim"}}
+    use { "tjdevries/gruvbuddy.nvim", requires = { "tjdevries/colorbuddy.vim" } }
 
     -- Plugin to reload NeoVim cofiguration.
     use {
-        'famiu/nvim-reload', requires = {'nvim-lua/plenary.nvim'}
+        'famiu/nvim-reload', requires = { 'nvim-lua/plenary.nvim' }
     }
 
     -- Telescope: fuzzy searching plugin.
     use {
-        'nvim-telescope/telescope.nvim', requires = {'nvim-lua/popup.nvim', 'nvim-lua/plenary.nvim'}
+        'nvim-telescope/telescope.nvim', requires = { 'nvim-lua/popup.nvim', 'nvim-lua/plenary.nvim' }
     }
 
     -- Telescope extension to use FZF as the fuzzy finder.
     use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 
     -- Buffer Line.
-    use {'akinsho/bufferline.nvim', tag = "v2.*", requires = 'kyazdani42/nvim-web-devicons'}
+    use { 'akinsho/bufferline.nvim', tag = "v2.*", requires = 'kyazdani42/nvim-web-devicons' }
 
     -- Status line plugin.
-    use { 'hoob3rt/lualine.nvim', requires = {'kyazdani42/nvim-web-devicons', opt = true} }
+    use { 'hoob3rt/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons', opt = true } }
 
     -- Plug-in to show indentation levels.
     use 'lukas-reineke/indent-blankline.nvim'
 
-    -- Rust Development.
-    use 'williamboman/mason.nvim'    
+    -- Mason LSP Server and code formatter manager.
+    use 'williamboman/mason.nvim'
     use 'williamboman/mason-lspconfig.nvim'
+
+    -- Rust Development.
+    use 'simrat39/rust-tools.nvim'
 end
 
 -- Wrap the plugin function and options in a table.
