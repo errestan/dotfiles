@@ -56,7 +56,7 @@ plugin_list = function()
 
     -- Completion formatter.
     use 'onsails/lspkind-nvim'
-    --
+
     -- LSP Utilities.
     use 'tami5/lspsaga.nvim'
 
@@ -106,6 +106,9 @@ plugin_list = function()
 
     -- Rust Development.
     use 'simrat39/rust-tools.nvim'
+
+    -- NULL Language Server, for Python formatting.
+    use { 'jose-elias-alvarez/null-ls.nvim', requires = { 'nvim-lua/plenary.nvim' } }
 end
 
 -- Wrap the plugin function and options in a table.

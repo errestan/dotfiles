@@ -26,8 +26,6 @@ local on_attach = function(client, bufnr)
     vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
     vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, opts)
     vim.keymap.set('n', '<leader>so', require('telescope.builtin').lsp_document_symbols, opts)
-
-    vim.api.nvim_create_user_command("Format", vim.lsp.buf.formatting, {})
 end
 
 -- nvim-cmp supports additional completion capabilities
@@ -67,3 +65,18 @@ for _, lsp in ipairs(servers) do
 end
 
 require('rust-tools').setup()
+
+local null_ls_ok, null_ls = pcall(require, "null-ls")
+if not null_ls_ok then
+    return
+end
+
+local sources = {
+    -- python
+    null_ls.builtins.formatting.black.with({
+        extra_args = { "--line-length=110" }
+    }),
+    null_ls.builtins.formatting.isort,
+}
+
+null_ls.setup({ sources = sources })
