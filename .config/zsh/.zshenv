@@ -34,6 +34,8 @@ if [ -f "${HOME}/.gpg-agent-info" ]; then
      export GPG_AGENT_INFO
      export SSH_AUTH_SOCK
      export SSH_AGENT_PID
+ else
+     export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 fi
 
 # Source local ZSH environment configuration.
