@@ -1,11 +1,18 @@
 -- Automatically install Packer if it isn't already installed.
-local install_url = "https://github.com/wbthomason/packer.nvim"
-local install_dir = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
+local ensure_packer = function()
+    local fn = vim.fn
+    local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
 
-if vim.fn.empty(vim.fn.glob(install_dir)) > 0 then
-    vim.fn.system({ 'git', 'clone', install_url, install_dir })
-    vim.api.nvim_command("packadd packer.nvim")
+    if fn.empty(fn.glob(install_path)) > 0 then
+        fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+        vim.cmd [[packadd packer.nvim]]
+        return true
+    end
+
+    return false
 end
+
+local packer_bootstrap = ensure_packer()
 
 -- Automatically update when plugins.lua is written to.
 local packer_group = vim.api.nvim_create_augroup('Packer', { clear = true })
@@ -34,12 +41,14 @@ plugin_list = function()
     use 'neovim/nvim-lspconfig'
 
     -- LSP Auto-completion.
+    use 'hrsh7th/nvim-cmp'
     use 'hrsh7th/cmp-nvim-lsp'
+    use 'hrsh7th/cmp-nvim-lsp-signature-help'
+    use 'hrsh7th/cmp-nvim-lua'
     use 'hrsh7th/cmp-buffer'
     use 'hrsh7th/cmp-path'
     use 'hrsh7th/cmp-cmdline'
     use 'saadparwaiz1/cmp_luasnip'
-    use 'hrsh7th/nvim-cmp'
 
     -- LSP Formatting.
     use "lukas-reineke/lsp-format.nvim"
@@ -109,13 +118,20 @@ plugin_list = function()
 
     -- NULL Language Server, for Python formatting.
     use { 'jose-elias-alvarez/null-ls.nvim', requires = { 'nvim-lua/plenary.nvim' } }
+
+    -- Smart pairing for brackets etc.
+    use 'windwp/nvim-autopairs'
+
+    if packer_bootstrap then
+        require('packer').sync()
+    end
 end
 
--- Wrap the plugin function and options in a table.
+-- Wrap the plug-in function and options in a table.
 spec = {
     plugin_list,
     config = options
 }
 
 -- Initialise the Packer package manager.
-require('packer').startup(spec)
+return require('packer').startup(spec)

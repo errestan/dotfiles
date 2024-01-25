@@ -10,3 +10,5 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 
 -- Indent blank-line
 require('ibl').setup()
+
+require('nvim-autopairs').setup()
