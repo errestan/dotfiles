@@ -38,5 +38,8 @@ if [ -f "${HOME}/.gpg-agent-info" ]; then
      export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 fi
 
+# Source Cargo environment.
+[ -f "$HOME/.cargo/env" ] && source "$HOME/.cargo/env"
+
 # Source local ZSH environment configuration.
 [ -f "$ZDOTDIR/.zshenv.local" ] && source "$ZDOTDIR/.zshenv.local"
