@@ -52,13 +52,21 @@ config = {
     formatting = {
         format = lspkind.cmp_format({
             mode = 'symbol', -- show only symbol annotations
-            maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+            maxwidth = 50,   -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
         })
     },
     sources = {
         { name = 'nvim_lsp' },
+        { name = 'nvim_lsp_signature_help' },
+        { name = 'nvim_lua',               keyword_length = 2 },
         { name = 'luasnip' },
-        { name = 'buffer' }
+        { name = 'buffer' },
+        { name = 'path' },
+        { name = 'calc' },
+    },
+    window = {
+        completion = cmp.config.window.bordered(),
+        documentation = cmp.config.window.bordered(),
     },
 }
 

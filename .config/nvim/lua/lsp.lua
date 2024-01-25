@@ -1,3 +1,36 @@
+-- Setup Diagnostic symbols.
+local sign = function(opts)
+    vim.fn.sign_define(opts.name, {
+        texthl = opts.name,
+        text = opts.text,
+        numhl = ''
+    })
+end
+
+sign({name = 'DiagnosticSignError', text = ''})
+sign({name = 'DiagnosticSignWarn', text = ''})
+sign({name = 'DiagnosticSignHint', text = ''})
+sign({name = 'DiagnosticSignInfo', text = ''})
+
+vim.diagnostic.config({
+    virtual_text = false,
+    signs = true,
+    update_in_insert = true,
+    underline = true,
+    severity_sort = false,
+    float = {
+        border = 'rounded',
+        source = 'always',
+        header = '',
+        prefix = '',
+    },
+})
+
+vim.cmd([[
+    set signcolumn=yes
+    autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = true })
+]])
+
 local lspconfig = require('lspconfig')
 
 require('lsp-format').setup()
@@ -27,6 +60,11 @@ local on_attach = function(client, bufnr)
     vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, opts)
     vim.keymap.set('n', '<leader>so', require('telescope.builtin').lsp_document_symbols, opts)
 end
+
+local rt = require('rust-tools')
+
+-- Use Rust Tools to setup the Rust LSP.
+rt.setup({ server = { on_attach = on_attach }, })
 
 -- nvim-cmp supports additional completion capabilities
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -63,8 +101,6 @@ for _, lsp in ipairs(servers) do
         settings = lsp.settings,
     }
 end
-
-require('rust-tools').setup()
 
 local null_ls_ok, null_ls = pcall(require, "null-ls")
 if not null_ls_ok then
