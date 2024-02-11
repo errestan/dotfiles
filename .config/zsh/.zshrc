@@ -33,8 +33,8 @@ SAVEHIST=10000000
 FZF_TMUX=1
 FZF_TMUX_OPTS="-p"
 
-# Enable Vim mode for command editing.
-bindkey -v
+# Enable Vim mode for command editin only if NOT running inside NeoVimg.
+[ -z $NVIM ] && bindkey -v
 
 # Accept auto-suggestion.
 bindkey '^n' autosuggest-accept
