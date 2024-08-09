@@ -7,7 +7,8 @@ local luasnip = require('luasnip')
 -- Enable LSP Kind formatter.
 local lspkind = require('lspkind')
 
--- Setup 'nvim-cmp'.
+
+-- Configure 'nvim-cmp'.
 local cmp = require('cmp')
 
 config = {
@@ -71,3 +72,8 @@ config = {
 }
 
 cmp.setup(config)
+
+-- Setup Auto Pairs support.
+local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+
+cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
