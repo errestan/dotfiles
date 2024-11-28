@@ -28,16 +28,6 @@ export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 # Enable experimental worker thread support in NodeJS.
 export NODE_OPTIONS="--experimental-worker"
 
-# Let GPG Agent handle SSH keys.
-# if [ -f "${HOME}/.gpg-agent-info" ]; then
-#      . "${HOME}/.gpg-agent-info"
-#      export GPG_AGENT_INFO
-#      export SSH_AUTH_SOCK
-#      export SSH_AGENT_PID
-#  else
-#      export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
-# fi
-
 # Source Cargo environment.
 [ -f "$HOME/.cargo/env" ] && source "$HOME/.cargo/env"
 
