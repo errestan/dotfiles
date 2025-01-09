@@ -1,3 +1,10 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.config/zsh/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # Enable plug-ins.
 plugins=(zsh-autosuggestions git docker docker-compose zsh-syntax-highlighting apt tmux)
 
@@ -70,6 +77,7 @@ if [ $? -eq 0 ]; then
     zplug "hschne/fzf-git"
     zplug "zsh-users/zsh-autosuggestions"
     zplug "zsh-users/zsh-syntax-highlighting", defer:2
+    zplug romkatv/powerlevel10k, as:theme, depth:1
 
     # Install plug-ins if there are plug-ins that have not been installed.
     if ! zplug check --verbose; then
@@ -92,3 +100,6 @@ if [ $? -eq 0 ]; then
 else
     echo "Error: direnv not installed" 2>&1
 fi
+
+# To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
+[[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
