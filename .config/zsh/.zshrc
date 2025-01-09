@@ -84,3 +84,11 @@ if [ $? -eq 0 ]; then
 else
     echo "Error: ZPlug not installed" 2>&1
 fi
+
+# Enable 'direnv' if available.
+direnv 2>&1 > /dev/null
+if [ $? -eq 0 ]; then
+    eval "$(direnv hook zsh)"
+else
+    echo "Error: direnv not installed" 2>&1
+fi
