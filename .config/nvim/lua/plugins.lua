@@ -101,7 +101,7 @@ plugin_list = function()
     use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 
     -- Buffer Line.
-    use { 'akinsho/bufferline.nvim', tag = "*", requires = 'nvim-tree/nvim-web-devicons' }
+    use { 'akinsho/bufferline.nvim', requires = 'nvim-tree/nvim-web-devicons' }
 
     -- Status line plug-in.
     use { 'hoob3rt/lualine.nvim', requires = { 'nvim-tree/nvim-web-devicons', opt = true } }
