@@ -1,3 +1,6 @@
+-- Set the default Python interpreter.
+vim.g.python3_host_prog = "/home/lee/.local/venv/nvim/bin/python"
+
 -- Set the line width.
 vim.o.textwidth = 110
 

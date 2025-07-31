@@ -69,6 +69,9 @@ plugin_list = function()
     -- LSP Utilities.
     use 'tami5/lspsaga.nvim'
 
+    -- Python Black formatting.
+    use 'averms/black-nvim'
+
     -- Enable tree-sitter.
     use {
         'nvim-treesitter/nvim-treesitter',
@@ -115,9 +118,6 @@ plugin_list = function()
 
     -- Rust Development.
     use 'simrat39/rust-tools.nvim'
-
-    -- NULL Language Server, for Python formatting.
-    use { 'jose-elias-alvarez/null-ls.nvim', requires = { 'nvim-lua/plenary.nvim' } }
 
     -- Smart pairing for brackets etc.
     use 'windwp/nvim-autopairs'
