@@ -6,7 +6,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # Enable plug-ins.
-plugins=(zsh-autosuggestions git docker docker-compose zsh-syntax-highlighting apt tmux)
+plugins=(zsh-autosuggestions git docker docker-compose zsh-syntax-highlighting apt tmux yadm)
 
 # Enable customized shell prompt.
 autoload -Uz promptinit; promptinit
@@ -68,7 +68,7 @@ alias vi=nvim
 [ -f $ZDOTDIR/.zshrc.local ] && source $ZDOTDIR/.zshrc.local
 
 # Z-Plug Configuration.
-ZPLUG_PATH="$HOME/.zplug/init.zsh"
+ZPLUG_PATH="/usr/share/zplug/init.zsh"
 [ -f $ZPLUG_PATH ] && source $ZPLUG_PATH
 
 zplug 2>&1 > /dev/null
