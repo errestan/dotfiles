@@ -1,35 +1,8 @@
--- General configuration.
-require('general')
-
--- Configure plugin manager and plugins.
-require('plugins')
-
--- Setup built-in LSP client.
-require('lsp')
-
--- Configure the Mason LSP Server manager.
-require('lsp_installer')
-
--- Configure colours and theme.
-require('colours')
-
--- Enable Comment.nvim.
-require('Comment').setup()
-
--- Configure installed plug-ins.
-require('completion')
-require('fuzzy-find')
-require('git')
-require('buffer-line')
-require('status-line')
-require('tree-sitter')
-
--- Misc configuration.
-require('misc')
-
--- Configure key mappings.
-require('mappings')
+require 'config.general'
+require 'config.mappings'
+require 'config.lazy'
+require 'config.misc'
 
 -- Source a local configuration file it exists.
-utils = require('utils')
-utils.source_if_exists("init.local.lua")
+utils = require 'utils'
+utils.source_if_exists 'init.local.lua'

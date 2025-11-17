@@ -8,28 +8,56 @@ vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = tr
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 -- Add leader shortcuts for Telescope.
-vim.keymap.set('n', '<leader>fb', require('telescope.builtin').buffers)
+vim.keymap.set('n', '<leader>fb', 
+    function()
+        require('telescope.builtin').buffers()
+    end
+)
 vim.keymap.set('n', '<leader>ff',
     function()
-        require('telescope.builtin').find_files { previewer = false }
+        require('telescope.builtin').find_files({ previewer = false })
     end
 )
 vim.keymap.set('n', '<leader>fg',
     function()
-        require('telescope.builtin').git_files { previewer = false, recurse_submodules = true }
+        require('telescope.builtin').git_files({ previewer = false, recurse_submodules = true })
     end
 )
-vim.keymap.set('n', '<leader>fs', require('telescope.builtin').current_buffer_fuzzy_find)
-vim.keymap.set('n', '<leader>fh', require('telescope.builtin').help_tags)
-vim.keymap.set('n', '<leader>ft', require('telescope.builtin').tags)
-vim.keymap.set('n', '<leader>fd', require('telescope.builtin').grep_string)
-vim.keymap.set('n', '<leader>fp', require('telescope.builtin').live_grep)
+vim.keymap.set('n', '<leader>fs',
+    function()
+        require('telescope.builtin').current_buffer_fuzzy_find()
+    end
+)
+vim.keymap.set('n', '<leader>fh',
+    function()
+        require('telescope.builtin').help_tags()
+    end
+)
+vim.keymap.set('n', '<leader>ft',
+    function()
+        require('telescope.builtin').tags()
+    end
+)
+vim.keymap.set('n', '<leader>fd',
+    function()
+        require('telescope.builtin').grep_string()
+    end
+)
+vim.keymap.set('n', '<leader>fp',
+    function()
+        require('telescope.builtin').live_grep()
+    end
+)
 vim.keymap.set('n', '<leader>fo',
     function()
-        require('telescope.builtin').tags { only_current_buffer = true }
+        require('telescope.builtin').tags({ only_current_buffer = true })
     end
 )
-vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles)
+vim.keymap.set('n', '<leader>?', 
+    function()
+        require('telescope.builtin').oldfiles()
+    end
+)
 
 -- Diagnostic keymaps.
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
