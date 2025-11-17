@@ -6,5 +6,9 @@
     excludesFile = ~/.config/git/exclude.conf
 [init]
     defaultBranch = main
+[difftool "nvim_difftool"]
+  cmd = nvim -c \"packadd nvim.difftool\" -c \"DiffTool $LOCAL $REMOTE\"
+[diff]
+  tool = nvim_difftool
 [include]
     path = ~/.config/git/config.local
