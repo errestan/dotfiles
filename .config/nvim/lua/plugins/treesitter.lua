@@ -29,9 +29,9 @@ return {
         enable = true,
       },
     },
+    config = function()
+      -- use bash parser for zsh files
+      -- vim.treesitter.language.register('bash', 'zsh')
+    end,
   },
-  config = function()
-    -- use bash parser for zsh files
-    vim.treesitter.language.register('bash', 'zsh')
-  end,
 }
