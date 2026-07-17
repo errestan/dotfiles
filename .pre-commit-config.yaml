@@ -1,0 +1,44 @@
+# Pre-commit hooks for the dotfiles repo.
+#   Install:  pre-commit install
+#   Run all:  pre-commit run --all-files
+#
+# Vendored / generated / binary files are excluded globally below.
+exclude: |
+  (?x)^(
+    \.local/share/fonts/.*|
+    \.config/nvim/colors/PaperColor\.vim|
+    \.config/zsh/\.p10k\.zsh
+  )$
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-merge-conflict
+      - id: check-added-large-files
+      - id: check-yaml
+      - id: mixed-line-ending
+        args: [--fix=lf]
+
+  # Format Lua (Neovim config). Uses the prebuilt release binary, so no Rust
+  # toolchain is required. Picks up .config/nvim/.stylua.toml automatically.
+  - repo: https://github.com/JohnnyMorganz/StyLua
+    rev: v2.5.2
+    hooks:
+      - id: stylua-github
+
+  # Spell-check comments and prose across all sources.
+  - repo: https://github.com/codespell-project/codespell
+    rev: v2.4.1
+    hooks:
+      - id: codespell
+        additional_dependencies: [tomli]
+
+  # Lint shell scripts (bash). zsh files are excluded as ShellCheck has no zsh mode.
+  - repo: https://github.com/shellcheck-py/shellcheck-py
+    rev: v0.10.0.1
+    hooks:
+      - id: shellcheck
+        exclude: ^\.config/zsh/

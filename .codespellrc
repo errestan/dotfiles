@@ -1,0 +1,4 @@
+[codespell]
+skip = .git,*.ttf,./.config/zsh/.p10k.zsh,./.config/nvim/colors/PaperColor.vim
+# To silence false positives, uncomment and add comma-separated lowercase words:
+# ignore-words-list = foo,bar
