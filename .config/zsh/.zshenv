@@ -1,5 +1,9 @@
 # Set default text editor.
-EDITOR=nvim
+export EDITOR=nvim
+export VISUAL=nvim
+
+# Collapse duplicate entries in $PATH (and keep them in sync).
+typeset -U path PATH
 
 # Android NDK toolchain path(s).
 ANDROID_NDK="/opt/android"
@@ -22,11 +26,8 @@ export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quo
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
 
-# Change where ZSH looks for its dot files.export ZDOTDIR="${${(%):-%x}:P:h}"
+# Change where ZSH looks for its dot files.
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
-
-# Enable experimental worker thread support in NodeJS.
-export NODE_OPTIONS="--experimental-worker"
 
 # Source Cargo environment.
 [ -f "$HOME/.cargo/env" ] && source "$HOME/.cargo/env"

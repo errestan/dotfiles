@@ -5,21 +5,6 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# Enable plug-ins.
-plugins=(zsh-autosuggestions git docker docker-compose zsh-syntax-highlighting apt tmux yadm)
-
-# Enable customized shell prompt.
-autoload -Uz promptinit; promptinit
-
-# Enable Git info for prompt.
-autoload -Uz vcs_info; precmd() { vcs_info }
-zstyle ':vcs_info:*' enable git
-zstyle ':vcs_info:git:*' formats $'\ue725 %b'
-setopt PROMPT_SUBST
-
-# Load custom prompt.
-. "$ZDOTDIR/prompt.zsh"
-
 # Ignore duplicate commands and share history across sessions.
 setopt histignorealldups sharehistory
 
@@ -30,18 +15,19 @@ setopt auto_pushd
 setopt pushd_ignore_dups
 
 # Set command history to be saved to a specific file.
-HISTFILE="$HOME/.hist_file"
+HISTFILE="${XDG_STATE_HOME:-$HOME/.local/state}/zsh/history"
+mkdir -p "${HISTFILE:h}"
 
-# Keep lots of command history.
-HISTSIZE=10000000
-SAVEHIST=10000000
+# Keep a generous but sane amount of command history.
+HISTSIZE=50000
+SAVEHIST=50000
 
 # Configure FZF to use a TMux pane.
 FZF_TMUX=1
 FZF_TMUX_OPTS="-p"
 
-# Enable Vim mode for command editin only if NOT running inside NeoVimg.
-[ -z $NVIM ] && bindkey -v
+# Enable Vim mode for command editing only if NOT running inside NeoVim.
+[[ -z $NVIM ]] && bindkey -v
 
 # Accept auto-suggestion.
 bindkey '^n' autosuggest-accept
@@ -58,21 +44,17 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 
 alias vi=nvim
 
-# Source ZSH completion configuration.
-[ -f $ZDOTDIR/completion.zsh ] && source $ZDOTDIR/completion.zsh
-
 # Source FZF key bindings if they exist.
-[ -f $ZDOTDIR/fzf.zsh ] && source $ZDOTDIR/fzf.zsh
+[ -f "$ZDOTDIR/fzf.zsh" ] && source "$ZDOTDIR/fzf.zsh"
 
 # Source a local ZSH configuration file.
-[ -f $ZDOTDIR/.zshrc.local ] && source $ZDOTDIR/.zshrc.local
+[ -f "$ZDOTDIR/.zshrc.local" ] && source "$ZDOTDIR/.zshrc.local"
 
 # Z-Plug Configuration.
 ZPLUG_PATH="$HOME/Development/oss/zplug/init.zsh"
-[ -f $ZPLUG_PATH ] && source $ZPLUG_PATH
+[ -f "$ZPLUG_PATH" ] && source "$ZPLUG_PATH"
 
-zplug 2>&1 > /dev/null
-if [ $? -eq 0 ]; then
+if command -v zplug > /dev/null; then
     # FZF Git completion.
     zplug "hschne/fzf-git"
     zplug "zsh-users/zsh-autosuggestions"
@@ -90,16 +72,19 @@ if [ $? -eq 0 ]; then
     # Then, source plug-ins and add commands to $PATH
     zplug load
 else
-    echo "Error: ZPlug not installed" 2>&1
+    echo "Error: ZPlug not installed" >&2
 fi
 
+# Source ZSH completion configuration. Run after zplug load so completions
+# contributed by plug-ins are registered by compinit.
+[ -f "$ZDOTDIR/completion.zsh" ] && source "$ZDOTDIR/completion.zsh"
+
 # Enable 'direnv' if available.
-direnv 2>&1 > /dev/null
-if [ $? -eq 0 ]; then
+if command -v direnv > /dev/null; then
     eval "$(direnv hook zsh)"
 else
-    echo "Error: direnv not installed" 2>&1
+    echo "Error: direnv not installed" >&2
 fi
 
 # To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
-[[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
+[[ ! -f "$ZDOTDIR/.p10k.zsh" ]] || source "$ZDOTDIR/.p10k.zsh"
