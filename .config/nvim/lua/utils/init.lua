@@ -1,11 +1,11 @@
-local utils = { }
+local utils = {}
 
 function utils.source_if_exists(file)
-    local path = vim.fn.stdpath("config") .. '/' .. file
+  local path = vim.fn.stdpath 'config' .. '/' .. file
 
-    if vim.fn.filereadable(path) == 1 then
-        vim.cmd("luafile " .. path)
-    end
+  if vim.fn.filereadable(path) == 1 then
+    dofile(path)
+  end
 end
 
 return utils

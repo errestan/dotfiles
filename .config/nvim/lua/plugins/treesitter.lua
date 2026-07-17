@@ -2,6 +2,9 @@ return {
   {
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter-textobjects',
+    },
     main = 'nvim-treesitter.configs', -- Sets main module to use for opts
     opts = {
       ensure_installed = {
@@ -29,9 +32,5 @@ return {
         enable = true,
       },
     },
-    config = function()
-      -- use bash parser for zsh files
-      -- vim.treesitter.language.register('bash', 'zsh')
-    end,
   },
 }

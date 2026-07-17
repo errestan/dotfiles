@@ -1,11 +1,14 @@
 -- Set the default Python interpreter.
-vim.g.python3_host_prog = "/home/lee/.local/venv/nvim/bin/python"
+vim.g.python3_host_prog = vim.fn.expand '~/.local/venv/nvim/bin/python'
+
+-- Signal that a Nerd Font is available so icons are enabled.
+vim.g.have_nerd_font = true
 
 -- Set the line width.
 vim.o.textwidth = 110
 
 -- Show a vertical line at the maximum line length.
-vim.o.colorcolumn = "110"
+vim.o.colorcolumn = '110'
 
 -- Always use UTF-8.
 vim.o.encoding = 'utf-8'
@@ -35,7 +38,7 @@ vim.o.expandtab = true
 vim.o.smartindent = true
 
 -- Always show the gutter.
-vim.o.signcolumn = "yes"
+vim.o.signcolumn = 'yes'
 
 -- Save undo history
 vim.opt.undofile = true

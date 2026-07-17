@@ -1,11 +1,33 @@
+local function builtin(name, opts)
+  return function()
+    require('telescope.builtin')[name](opts)
+  end
+end
+
 return {
   'nvim-telescope/telescope.nvim',
+  cmd = 'Telescope',
   dependencies = {
     'nvim-lua/popup.nvim',
     'nvim-lua/plenary.nvim',
     { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
     'nvim-tree/nvim-web-devicons',
     'folke/todo-comments.nvim',
+  },
+  keys = {
+    { '<leader>ff', builtin 'find_files', desc = 'Find files' },
+    { '<leader>fb', builtin 'buffers', desc = 'Find buffers' },
+    { '<leader>fg', builtin('git_files', { recurse_submodules = true }), desc = 'Find git files' },
+    { '<leader>fh', builtin 'help_tags', desc = 'Find help tags' },
+    { '<leader>fs', builtin 'current_buffer_fuzzy_find', desc = 'Fuzzy find in buffer' },
+    { '<leader>fp', builtin 'live_grep', desc = 'Live grep' },
+    { '<leader>fd', builtin 'grep_string', desc = 'Grep string under cursor' },
+    { '<leader>fo', builtin('tags', { only_current_buffer = true }), desc = 'Buffer tags' },
+    { '<leader>fT', builtin 'tags', desc = 'Find tags (ctags)' },
+    { '<leader>fr', builtin 'oldfiles', desc = 'Find recent files' },
+    { '<leader>?', builtin 'oldfiles', desc = 'Find recent files' },
+    { '<leader>fk', builtin 'keymaps', desc = 'Find keymaps' },
+    { '<leader>ft', '<cmd>TodoTelescope<cr>', desc = 'Find todos' },
   },
   config = function()
     local telescope = require 'telescope'
@@ -36,16 +58,6 @@ return {
       },
     }
 
-    -- telescope.load_extension 'fzf'
-
-    -- set keymaps
-    local keymap = vim.keymap -- for conciseness
-
-    keymap.set('n', '<leader>ff', '<cmd>Telescope find_files<cr>', { desc = 'Fuzzy find files in cwd' })
-    keymap.set('n', '<leader>fr', '<cmd>Telescope oldfiles<cr>', { desc = 'Fuzzy find recent files' })
-    keymap.set('n', '<leader>fs', '<cmd>Telescope live_grep<cr>', { desc = 'Find string in cwd' })
-    keymap.set('n', '<leader>fc', '<cmd>Telescope grep_string<cr>', { desc = 'Find string under cursor in cwd' })
-    keymap.set('n', '<leader>ft', '<cmd>TodoTelescope<cr>', { desc = 'Find todos' })
-    keymap.set('n', '<leader>fk', '<cmd>Telescope keymaps<cr>', { desc = 'Find todos' })
+    telescope.load_extension 'fzf'
   end,
 }
